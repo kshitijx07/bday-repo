@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, RotateCcw, Flame, Mic } from 'lucide-react';
+import { Sparkles, RotateCcw, Flame, Mic, Gift, Check } from 'lucide-react';
 import { storyData } from '../data/storyContent';
-import { listenForBlow, playBlowSound, playChime } from '../utils/audio';
+import { listenForBlow, playBlowSound, playChime, playSparkle } from '../utils/audio';
 
 export default function CakeSection() {
   const { cakeSection, hisName, herName } = storyData;
   const [blown, setBlown] = useState(false);
   const [micActive, setMicActive] = useState(false);
+  const [voucherClaimed, setVoucherClaimed] = useState(false);
   const cleanupMicRef = useRef<(() => void) | null>(null);
 
   // Handle blowing out the candle
@@ -50,6 +51,12 @@ export default function CakeSection() {
   const handleRelight = () => {
     playChime(440, 1.5, 0.06);
     setBlown(false);
+    setVoucherClaimed(false);
+  };
+
+  const handleClaimVoucher = () => {
+    playSparkle();
+    setVoucherClaimed(true);
   };
 
   const handleScrollToTop = () => {
@@ -133,7 +140,7 @@ export default function CakeSection() {
                 className="mb-2 label text-xs text-blush flex items-center gap-1.5 font-semibold"
               >
                 <Sparkles size={12} />
-                <span>Wish Made ✨</span>
+                <span>Wish Made · Stardust Released ✨</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -182,10 +189,56 @@ export default function CakeSection() {
             </p>
           </div>
         ) : (
-          <div className="flex items-center gap-3 mt-6">
+          <div className="flex flex-col items-center gap-4 mt-6 w-full max-w-sm">
+            {/* SURPRISE GOLDEN BIRTHDAY VOUCHER UNLOCKED */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="w-full bg-[#FFFDF9] border border-blush/60 rounded-2xl p-5 shadow-xl text-center relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-16 h-16 bg-blush/10 rounded-bl-full pointer-events-none" />
+              <div className="flex items-center justify-center gap-2 text-blush mb-1.5">
+                <Gift size={16} />
+                <span className="label text-[0.6rem] font-bold tracking-widest uppercase">
+                  Birthday Surprise Unlocked
+                </span>
+              </div>
+              <h4 className="font-serif text-lg text-forest-deep font-normal leading-tight">
+                Voucher No. 1124 · Valid Forever
+              </h4>
+              <p
+                className="font-serif text-sm italic text-forest/80 leading-relaxed mt-2"
+                style={{ fontFamily: '"Dancing Script", cursive' }}
+              >
+                “Redeemable for: One spontaneous midnight drive, unlimited ice cream, and my undivided attention anytime your heart asks for it.”
+              </p>
+
+              <div className="mt-4 pt-3 border-t border-forest/10 flex items-center justify-between">
+                <span className="label text-[0.55rem] text-forest/50">Issued with all my love</span>
+                <button
+                  onClick={handleClaimVoucher}
+                  className={`px-4 py-1.5 rounded-full text-xs font-serif font-normal transition-all flex items-center gap-1 cursor-pointer ${
+                    voucherClaimed
+                      ? 'bg-forest text-ivory'
+                      : 'bg-blush text-forest-darker hover:bg-blush-deep active:scale-95'
+                  }`}
+                >
+                  {voucherClaimed ? (
+                    <>
+                      <Check size={12} />
+                      <span>Claimed by Neha ♥</span>
+                    </>
+                  ) : (
+                    <span>Claim Voucher</span>
+                  )}
+                </button>
+              </div>
+            </motion.div>
+
             <button
               onClick={handleRelight}
-              className="glass label flex items-center gap-2 rounded-full px-6 py-3 text-xs text-forest hover:text-blush border border-forest/20 hover:border-blush active:scale-95 transition-all cursor-pointer bg-[#FFFDF9] min-h-[44px] touch-manipulation"
+              className="glass label flex items-center gap-2 rounded-full px-6 py-2.5 text-xs text-forest/70 hover:text-blush border border-forest/20 hover:border-blush active:scale-95 transition-all cursor-pointer bg-[#FFFDF9] min-h-[40px] touch-manipulation mt-2"
             >
               <RotateCcw size={12} />
               <span>Light Candle Again</span>

@@ -142,11 +142,17 @@ function WildflowerSVG({ isBloomed }: { isBloomed: boolean }) {
 export default function GardenSection() {
   const { gardenSection } = storyData;
   const [activeFlowerId, setActiveFlowerId] = useState<string>('rose');
+  const [bloomedFlowers, setBloomedFlowers] = useState<string[]>(['rose']);
 
   const handleBloom = (id: string) => {
     playFlowerPop();
     setActiveFlowerId(id);
+    if (!bloomedFlowers.includes(id)) {
+      setBloomedFlowers((prev) => [...prev, id]);
+    }
   };
+
+  const allBloomed = bloomedFlowers.length >= 4;
 
   const activeFlower =
     gardenSection.flowers.find((f) => f.id === activeFlowerId) ||
@@ -233,7 +239,19 @@ export default function GardenSection() {
         </AnimatePresence>
       </div>
 
-      <p className="mt-10 label text-[0.6rem] text-forest/50 tracking-widest italic">
+      {/* Special Bouquet Completion Banner */}
+      {allBloomed && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          className="mt-6 px-4 py-2 rounded-full bg-blush/20 border border-blush/50 text-forest-deep text-xs font-serif italic flex items-center gap-2 shadow-xs"
+        >
+          <span>🌸</span>
+          <span>Bouquet Complete · All 4 devotions unlocked for Neha ✨</span>
+        </motion.div>
+      )}
+
+      <p className="mt-8 label text-[0.6rem] text-forest/50 tracking-widest italic">
         {gardenSection.microcopy}
       </p>
     </section>

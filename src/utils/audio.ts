@@ -53,6 +53,17 @@ export function playChime(freq = 523.25, duration = 2.4, gainLevel = 0.08) {
   }
 }
 
+/** Play magical cascading sparkle arpeggio */
+export function playSparkle() {
+  if (isMuted) return;
+  const notes = [1046.5, 1318.5, 1567.98, 1975.53, 2093.0];
+  notes.forEach((freq, i) => {
+    setTimeout(() => {
+      playChime(freq, 1.4, 0.04);
+    }, i * 70);
+  });
+}
+
 /** Soft paper-flip sound for 3D book and letter unfold */
 export function playPaperFlip() {
   if (isMuted) return;

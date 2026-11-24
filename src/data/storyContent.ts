@@ -32,14 +32,14 @@ export const storyData = {
     label: 'Issue No. 24 · Private Archive',
     headline: 'For',
     subheadline: 'The muse who turned my chaos into modern poetry.',
-    prompt: 'Hold the wax seal to unlock our frequency',
+    prompt: 'Tap or hold the seal to unlock our story',
     footnote: 'A cinematic journey in seven chapters',
   },
 
   bookSection: {
     label: 'Chapter 01 · The Keepsake',
     title: 'Curated in Whispers',
-    subtitle: 'Tilt your screen or tap the spine to unveil what’s inside.',
+    subtitle: 'Tap the book cover to reveal what’s hidden inside.',
     year: 'Unapologetic & Everlasting',
     coverTitle: 'NEHA',
     previewPhoto: img('intro.jpg'),
