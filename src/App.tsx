@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import RosePetalLoader from './components/RosePetalLoader';
 import ParticleCanvas from './components/ParticleCanvas';
 import FilmGrainOverlay from './components/FilmGrainOverlay';
 import CustomCursor from './components/CustomCursor';
@@ -13,6 +14,8 @@ import CakeSection from './components/CakeSection';
 import { initSmoothScroll } from './utils/motion';
 
 export default function App() {
+  const [, setIsLoaded] = useState(false);
+
   useEffect(() => {
     // Lenis smooth scroll on desktop, native hardware 120Hz/60Hz on mobile
     const lenis = initSmoothScroll();
@@ -23,6 +26,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen w-full max-w-full bg-ivory text-forest overflow-x-hidden selection:bg-blush/30 selection:text-forest">
+      {/* Rose Petal Preloader to ensure all images load properly */}
+      <RosePetalLoader onLoaded={() => setIsLoaded(true)} />
+
       {/* Delicate Smooth Paper Grain & Soft Edge Vignette */}
       <FilmGrainOverlay />
 
