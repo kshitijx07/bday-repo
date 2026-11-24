@@ -228,15 +228,23 @@ export default function BookSection() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="w-full h-full relative"
+                                className="w-full h-full relative overflow-hidden"
                               >
+                                {/* Golden shimmer wipe on surprise reveal */}
+                                <motion.div
+                                  initial={{ x: '-150%', opacity: 0.8 }}
+                                  animate={{ x: '250%', opacity: 0 }}
+                                  transition={{ duration: 1.6, delay: 0.15, ease: 'easeInOut' }}
+                                  className="pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/60 to-transparent z-10"
+                                />
+
                                 <img
                                   src={bookSection.previewPhoto}
                                   alt="Neha preview"
                                   className="w-full h-full object-cover"
                                   draggable={false}
                                 />
-                                <div className="absolute top-2 right-2 p-1.5 rounded-full bg-ivory/85 text-forest-deep shadow-xs opacity-90 group-hover:opacity-100 flex items-center gap-1 text-[0.55rem] label">
+                                <div className="absolute top-2 right-2 p-1.5 rounded-full bg-ivory/85 text-forest-deep shadow-xs opacity-90 group-hover:opacity-100 flex items-center gap-1 text-[0.55rem] label z-20">
                                   <RotateCw size={10} className="text-blush" />
                                   <span className="hidden sm:inline">Flip</span>
                                 </div>

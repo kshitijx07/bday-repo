@@ -3,12 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, RotateCcw, Flame, Mic, Gift, Check } from 'lucide-react';
 import { storyData } from '../data/storyContent';
 import { listenForBlow, playBlowSound, playChime, playSparkle } from '../utils/audio';
+import CelebrationBalloons from './CelebrationBalloons';
 
 export default function CakeSection() {
   const { cakeSection, hisName, herName } = storyData;
   const [blown, setBlown] = useState(false);
   const [micActive, setMicActive] = useState(false);
   const [voucherClaimed, setVoucherClaimed] = useState(false);
+  const [showCandleBalloons, setShowCandleBalloons] = useState(false);
   const cleanupMicRef = useRef<(() => void) | null>(null);
 
   // Handle blowing out the candle
@@ -23,6 +25,11 @@ export default function CakeSection() {
     });
 
     setBlown(true);
+    setShowCandleBalloons(true);
+    setTimeout(() => {
+      setShowCandleBalloons(false);
+    }, 7500);
+
     if (cleanupMicRef.current) {
       cleanupMicRef.current();
     }
@@ -312,6 +319,9 @@ export default function CakeSection() {
           Crafted with love by {hisName} for {herName}
         </p>
       </div>
+
+      {/* Floating Birthday Balloons on candle blow */}
+      <CelebrationBalloons active={showCandleBalloons} count={18} />
     </section>
   );
 }
