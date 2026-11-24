@@ -1,0 +1,156 @@
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Sparkles, Heart as HeartIcon } from 'lucide-react';
+import { storyData, type TruthCard } from '../data/storyContent';
+import Heart from './Heart';
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function StackedTruthCards() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+
+  const truths: TruthCard[] = storyData.chapter2.truths;
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = cardsRef.current;
+
+      cards.forEach((card, index) => {
+        if (index === cards.length - 1) return; // Last card doesn't need to scale down for another
+
+        ScrollTrigger.create({
+          trigger: cards[index + 1],
+          start: 'top 75%',
+          end: 'top 15%',
+          scrub: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            gsap.set(card, {
+              scale: 1 - progress * 0.06,
+              filter: `brightness(${1 - progress * 0.25})`,
+              opacity: 1 - progress * 0.2,
+            });
+          },
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={containerRef}
+      id="truths"
+      className="relative py-20 sm:py-28 px-4 sm:px-8 max-w-5xl mx-auto"
+    >
+      <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <span className="label text-[0.65rem] text-blush font-semibold tracking-widest uppercase">
+            Chapter II
+          </span>
+          <div className="h-[1px] w-8 bg-blush/40" />
+          <span className="label text-[0.62rem] text-sky/60 tracking-wider">
+            Sacred Truths
+          </span>
+        </div>
+        <h2 className="font-serif text-[clamp(2.1rem,6vw,4.5rem)] font-light leading-[1.08] text-sky">
+          Three Truths I Keep in My Soul
+        </h2>
+        <p className="mt-3 text-xs sm:text-sm text-sky/70 leading-relaxed max-w-md mx-auto">
+          Scroll through the cards to uncover the vows that time can never erase.
+        </p>
+      </div>
+
+      {/* Stacked Cards Container */}
+      <div className="relative space-y-12 sm:space-y-16">
+        {truths.map((truth, idx) => {
+          const isLast = idx === 2;
+          return (
+            <div
+              key={truth.id}
+              ref={(el) => {
+                if (el) cardsRef.current[idx] = el;
+              }}
+              className="sticky top-20 sm:top-24 rounded-3xl p-6 sm:p-10 md:p-14 border transition-all duration-300 shadow-2xl overflow-hidden"
+              style={{
+                backgroundColor: isLast ? '#315C4C' : idx === 1 ? '#F7F0E3' : '#FFF7E8',
+                borderColor: isLast ? 'rgba(242,167,181,.4)' : 'rgba(242,167,181,.35)',
+                color: isLast ? '#FFF7E8' : '#315C4C',
+                transformOrigin: 'center top',
+                willChange: 'transform, filter, opacity',
+              }}
+            >
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-6 border-b border-blush/25 mb-6">
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`font-serif text-3xl sm:text-4xl font-light ${
+                      isLast ? 'text-blush' : 'text-sky'
+                    }`}
+                  >
+                    {truth.number}
+                  </span>
+                  <span
+                    className={`label text-[0.65rem] tracking-widest uppercase font-semibold ${
+                      isLast ? 'text-ivory/80' : 'text-sky/70'
+                    }`}
+                  >
+                    {truth.subtitle}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Sparkles size={14} className="text-blush" />
+                  <Heart size={10} className="text-blush" />
+                </div>
+              </div>
+
+              {/* Title */}
+              <h3
+                className={`font-serif text-2xl sm:text-4xl md:text-5xl font-light leading-tight mb-6 ${
+                  isLast ? 'text-ivory' : 'text-sky'
+                }`}
+              >
+                {truth.title}
+              </h3>
+
+              {/* Poetic Prose */}
+              <div className="space-y-4 max-w-3xl">
+                {truth.poeticProse.map((paragraph, pIdx) => (
+                  <p
+                    key={pIdx}
+                    className={`font-serif text-base sm:text-xl leading-relaxed italic ${
+                      isLast ? 'text-ivory/90' : 'text-sky/85'
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+
+              {/* Card Footer */}
+              <div className="mt-8 pt-6 border-t border-blush/20 flex items-center justify-between">
+                <span
+                  className={`label text-[0.6rem] tracking-wider uppercase ${
+                    isLast ? 'text-ivory/60' : 'text-sky/50'
+                  }`}
+                >
+                  Dedicated to Neha
+                </span>
+                <span
+                  className={`label text-[0.6rem] tracking-wider font-semibold ${
+                    isLast ? 'text-blush' : 'text-blush'
+                  }`}
+                >
+                  By Kshitij
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}

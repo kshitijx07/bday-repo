@@ -5,25 +5,66 @@ export default function CustomCursor() {
   const reduce = useReducedMotion();
   const [fine, setFine] = useState(false);
   const [hover, setHover] = useState(false);
-  const x = useMotionValue(-100), y = useMotionValue(-100);
-  const sx = useSpring(x, { stiffness: 380, damping: 32 }), sy = useSpring(y, { stiffness: 380, damping: 32 });
+
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  // Smooth lagging follower ring
+  const ringX = useSpring(mouseX, { stiffness: 220, damping: 28 });
+  const ringY = useSpring(mouseY, { stiffness: 220, damping: 28 });
 
   useEffect(() => {
     if (reduce || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     setFine(true);
+
     const move = (e: PointerEvent) => {
-      x.set(e.clientX); y.set(e.clientY);
-      setHover(!!(e.target as HTMLElement | null)?.closest('button,a,[role="button"]'));
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      const target = e.target as HTMLElement | null;
+      setHover(!!target?.closest('button, a, [role="button"], canvas, input'));
     };
-    window.addEventListener('pointermove', move);
+
+    window.addEventListener('pointermove', move, { passive: true });
     return () => window.removeEventListener('pointermove', move);
-  }, [reduce, x, y]);
+  }, [reduce, mouseX, mouseY]);
 
   if (!fine) return null;
+
   return (
-    <motion.div aria-hidden="true" className="pointer-events-none fixed left-0 top-0 z-[100] flex items-center justify-center" style={{ x: sx, y: sy }}>
-      <motion.div animate={{ width: hover ? 46 : 26, height: hover ? 46 : 26, borderColor: hover ? 'rgba(242,167,181,.9)' : 'rgba(49,92,76,.5)' }} className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2" style={{ transition: 'width .3s, height .3s, border-color .3s' }} />
-      <span className="absolute h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blush" />
-    </motion.div>
+    <>
+      {/* Outer Follower Ring */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[100] flex items-center justify-center will-change-transform"
+        style={{ x: ringX, y: ringY }}
+      >
+        <motion.div
+          animate={{
+            width: hover ? 54 : 32,
+            height: hover ? 54 : 32,
+            borderColor: hover ? 'rgba(242, 167, 181, 0.95)' : 'rgba(49, 92, 76, 0.4)',
+            backgroundColor: hover ? 'rgba(242, 167, 181, 0.08)' : 'transparent',
+          }}
+          transition={{ duration: 0.2 }}
+          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed"
+        />
+      </motion.div>
+
+      {/* Instant Central Dot */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[100] will-change-transform"
+        style={{ x: mouseX, y: mouseY }}
+      >
+        <motion.span
+          animate={{
+            scale: hover ? 1.6 : 1,
+            backgroundColor: hover ? '#F2A7B5' : '#315C4C',
+          }}
+          transition={{ duration: 0.15 }}
+          className="block h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        />
+      </motion.div>
+    </>
   );
 }

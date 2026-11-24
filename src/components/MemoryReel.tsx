@@ -6,6 +6,84 @@ import { storyData, type MemoryPhoto } from '../data/storyContent';
 import { playChime } from '../utils/audio';
 import Heart from './Heart';
 
+function MemoryCard({
+  photo,
+  idx,
+  onOpen,
+}: {
+  photo: MemoryPhoto;
+  idx: number;
+  onOpen: () => void;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    setRotate({
+      x: ((y - centerY) / centerY) * -6,
+      y: ((x - centerX) / centerX) * 6,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 });
+  };
+
+  return (
+    <div style={{ perspective: 1000 }} className="h-full">
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        animate={{ rotateX: rotate.x, rotateY: rotate.y }}
+        transition={{ type: 'spring', stiffness: 240, damping: 22 }}
+        className="group relative rounded-2xl overflow-hidden border border-blush/35 bg-ivory shadow-sm hover:shadow-2xl hover:border-blush transition-shadow duration-300 flex flex-col h-full will-change-transform"
+      >
+        {/* Image Container */}
+        <div
+          onClick={onOpen}
+          className="relative aspect-[3/4] overflow-hidden cursor-pointer"
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            loading="lazy"
+            draggable={false}
+            className="w-full h-full object-cover transform group-hover:scale-106 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-sky/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <span className="glass rounded-full p-2.5 text-ivory hover:text-blush">
+              <Maximize2 size={16} />
+            </span>
+          </div>
+        </div>
+
+        {/* Caption & Poetic Note */}
+        <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2 bg-ivory/95">
+          <div>
+            <div className="flex items-center justify-between text-[0.62rem] label text-sky/50 mb-1">
+              <span>Moment 0{idx + 1}</span>
+              <Heart size={8} className="text-blush" />
+            </div>
+            <h3 className="font-serif text-lg sm:text-xl text-sky font-normal">
+              {photo.caption}
+            </h3>
+            <p className="mt-1 font-serif text-xs sm:text-sm text-sky/75 italic leading-relaxed">
+              {photo.poeticNote}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function MemoryReel() {
   const { chapter3 } = storyData;
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
@@ -69,49 +147,15 @@ export default function MemoryReel() {
         </p>
       </div>
 
-      {/* Grid of 6 Memories */}
+      {/* Grid of 5 Curated Memories with 3D Tilt */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {chapter3.photos.map((photo, idx) => (
-          <motion.div
+          <MemoryCard
             key={idx}
-            whileHover={{ y: -6 }}
-            className="group relative rounded-2xl overflow-hidden border border-blush/35 bg-ivory shadow-sm hover:shadow-xl hover:border-blush transition-all duration-500 flex flex-col"
-          >
-            {/* Image Container */}
-            <div
-              onClick={() => openLightbox(idx)}
-              className="relative aspect-[3/4] overflow-hidden cursor-pointer"
-            >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                loading="lazy"
-                draggable={false}
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-sky/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <span className="glass rounded-full p-2 text-ivory hover:text-blush">
-                  <Maximize2 size={16} />
-                </span>
-              </div>
-            </div>
-
-            {/* Caption & Poetic Note */}
-            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2 bg-ivory/90">
-              <div>
-                <div className="flex items-center justify-between text-[0.62rem] label text-sky/50 mb-1">
-                  <span>Moment 0{idx + 1}</span>
-                  <Heart size={8} className="text-blush" />
-                </div>
-                <h3 className="font-serif text-lg sm:text-xl text-sky font-normal">
-                  {photo.caption}
-                </h3>
-                <p className="mt-1 font-serif text-xs sm:text-sm text-sky/75 italic leading-relaxed">
-                  {photo.poeticNote}
-                </p>
-              </div>
-            </div>
-          </motion.div>
+            photo={photo}
+            idx={idx}
+            onOpen={() => openLightbox(idx)}
+          />
         ))}
       </div>
 
@@ -148,7 +192,7 @@ export default function MemoryReel() {
               </span>
               <button
                 onClick={closeLightbox}
-                className="glass p-2.5 rounded-full text-sky hover:border-blush hover:text-blush active:scale-95 transition-all"
+                className="glass p-2.5 rounded-full text-sky hover:border-blush hover:text-blush active:scale-95 transition-all cursor-pointer"
                 aria-label="Close lightbox"
               >
                 <X size={20} />
@@ -181,7 +225,7 @@ export default function MemoryReel() {
             <div className="flex items-center gap-6">
               <button
                 onClick={prevPhoto}
-                className="glass p-3 rounded-full text-sky hover:border-blush hover:text-blush active:scale-90 transition-all"
+                className="glass p-3 rounded-full text-sky hover:border-blush hover:text-blush active:scale-90 transition-all cursor-pointer"
                 aria-label="Previous photo"
               >
                 <ChevronLeft size={20} />
@@ -191,7 +235,7 @@ export default function MemoryReel() {
               </span>
               <button
                 onClick={nextPhoto}
-                className="glass p-3 rounded-full text-sky hover:border-blush hover:text-blush active:scale-90 transition-all"
+                className="glass p-3 rounded-full text-sky hover:border-blush hover:text-blush active:scale-90 transition-all cursor-pointer"
                 aria-label="Next photo"
               >
                 <ChevronRight size={20} />
