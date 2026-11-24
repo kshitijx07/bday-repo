@@ -22,14 +22,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full max-w-full bg-charcoal text-silver overflow-x-hidden selection:bg-signal selection:text-silver-light">
-      {/* 5% Film Grain & Soft Vignette Overlay */}
+    <div className="relative min-h-screen w-full max-w-full bg-ivory text-forest overflow-x-hidden selection:bg-blush/30 selection:text-forest">
+      {/* Delicate Smooth Paper Grain & Soft Edge Vignette */}
       <FilmGrainOverlay />
 
-      {/* Floating Ambient Dust & Petals */}
+      {/* Floating Ambient Botanical Dust & Blush Rose Petals */}
       <ParticleCanvas />
 
-      {/* Luxury Custom Cursor (Silver dot to red heart / Mobile touch ripples) */}
+      {/* Luxury Custom Cursor (Forest dot to Blush Pink heart / Mobile touch ripples) */}
       <CustomCursor />
 
       {/* Floating Audio Controller (Minimal Top-Right) */}
@@ -45,10 +45,10 @@ export default function App() {
 
       {/* 7 Continuous Film Scroll Sections */}
       <main className="relative z-10 flex flex-col w-full max-w-full overflow-x-hidden">
-        {/* 1. Gate Section: Name with Doodle Underline, Floating Dust, Hold Red Wax Seal */}
+        {/* 1. Gate Section: Name with Blush Doodle Underline, Floating Dust, Blush Wax Seal */}
         <GateSection />
 
-        {/* 2. 3D Book Section: Gyroscope/Pointer Tilt, Scroll/Tap Open with Paper-Flip */}
+        {/* 2. 3D Book Section: Forest & Ivory Cover, Gyroscope/Pointer Tilt, Paper-Flip */}
         <BookSection />
 
         {/* 3. Poem Section: Giant Outlined Parallax Words, Scroll-Lit Text, Paper Plane */}
@@ -60,7 +60,7 @@ export default function App() {
         {/* 5. Garden Section: 4 Self-Drawing Flowers & Tap-to-Bloom Love Reasons */}
         <GardenSection />
 
-        {/* 6. Letter Section: Sliding Envelope, 3D Parchment Unfold & Red Signature */}
+        {/* 6. Letter Section: Luxury Envelope, 3D Parchment Unfold & Blush Signature */}
         <LetterSection />
 
         {/* 7. Cake Finale Section: SVG Cake, Mic Breath Blow Detection, Falling Petals */}

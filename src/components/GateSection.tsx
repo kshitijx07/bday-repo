@@ -81,19 +81,19 @@ export default function GateSection() {
       id="gate"
       className="relative min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 pt-16 pb-12 sm:pt-20 sm:pb-16 overflow-hidden max-w-full"
     >
-      {/* Top Badge */}
+      {/* Top Editorial Badge */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.2 }}
         className="relative z-10 flex flex-col items-center gap-2"
       >
-        <div className="flex items-center gap-2 text-silver/60 label text-[0.62rem] sm:text-xs tracking-widest">
-          <Sparkles size={11} className="text-signal" />
+        <div className="flex items-center gap-2 text-forest/70 label text-[0.62rem] sm:text-xs tracking-widest">
+          <Sparkles size={11} className="text-blush" />
           <span>{gate.label}</span>
-          <Sparkles size={11} className="text-signal" />
+          <Sparkles size={11} className="text-blush" />
         </div>
-        <div className="h-4 w-[1px] bg-silver/20" />
+        <div className="h-4 w-[1px] bg-forest/20" />
       </motion.div>
 
       {/* Main Content */}
@@ -104,16 +104,16 @@ export default function GateSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.4 }}
-            className="font-serif text-[clamp(2.8rem,9vw,6rem)] font-light leading-none text-silver-light tracking-tight"
+            className="font-serif text-[clamp(2.8rem,9vw,6rem)] font-light leading-none text-forest-deep tracking-tight"
           >
-            {gate.headline} <span className="text-signal italic">{herName}</span>
+            {gate.headline} <span className="text-blush italic font-normal">{herName}</span>
           </motion.h1>
 
-          {/* Self-drawing hand-drawn doodle underline */}
+          {/* Self-drawing hand-drawn doodle underline in Blush Pink */}
           <svg
             viewBox="0 0 280 24"
-            className="w-full h-5 mt-1 overflow-visible stroke-signal fill-none"
-            strokeWidth={2}
+            className="w-full h-5 mt-1 overflow-visible stroke-blush fill-none"
+            strokeWidth={2.4}
             strokeLinecap="round"
           >
             <motion.path
@@ -129,12 +129,12 @@ export default function GateSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.8 }}
-          className="font-serif text-lg sm:text-2xl text-silver/80 italic max-w-md px-4 mt-2"
+          className="font-serif text-lg sm:text-2xl text-forest/80 italic max-w-md px-4 mt-2"
         >
           {gate.subheadline}
         </motion.p>
 
-        {/* Signal Red Wax Seal (Press & Hold or Tap to unlock) */}
+        {/* Blush Pink Wax Seal (Press & Hold or Tap to unlock) */}
         <motion.div
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -161,8 +161,8 @@ export default function GateSection() {
                   cy="56"
                   r="50"
                   fill="none"
-                  stroke="#E10600"
-                  strokeWidth="3"
+                  stroke="#F2A7B5"
+                  strokeWidth="3.5"
                   strokeDasharray="314"
                   strokeDashoffset={314 - (314 * holdProgress) / 100}
                   className="transition-all duration-75"
@@ -170,33 +170,33 @@ export default function GateSection() {
               </svg>
             )}
 
-            {/* Glowing Aura */}
+            {/* Glowing Blush Aura */}
             <div
               className={`absolute -inset-4 rounded-full blur-xl transition-opacity duration-500 ${
-                holding || unsealed ? 'opacity-80 bg-signal/50' : 'opacity-30 bg-signal/30'
+                holding || unsealed ? 'opacity-80 bg-blush/60' : 'opacity-40 bg-blush/30'
               }`}
             />
 
-            {/* Wax Seal Body */}
-            <div className="relative w-22 h-22 rounded-full bg-gradient-to-br from-signal via-signal-deep to-[#7A0200] border-2 border-signal/60 shadow-[0_10px_30px_rgba(225,6,0,0.4)] flex flex-col items-center justify-center transform active:scale-95 transition-transform duration-200">
+            {/* Wax Seal Body in Romantic Blush Pink */}
+            <div className="relative w-22 h-22 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-[0_10px_28px_rgba(242,167,181,0.5)] flex flex-col items-center justify-center transform active:scale-95 transition-transform duration-200">
               {/* Inner Stamp Rim */}
-              <div className="w-17 h-17 rounded-full border border-silver/30 flex flex-col items-center justify-center">
+              <div className="w-17 h-17 rounded-full border border-ivory/50 flex flex-col items-center justify-center">
                 <svg
                   viewBox="0 0 24 24"
                   width={22}
                   height={22}
-                  className="fill-silver-light animate-beat drop-shadow-sm"
+                  className="fill-ivory animate-beat drop-shadow-sm"
                 >
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
-                <span className="font-serif text-[0.62rem] tracking-widest uppercase font-semibold text-silver-light mt-1">
+                <span className="font-serif text-[0.62rem] tracking-widest uppercase font-semibold text-ivory mt-1">
                   K &amp; N
                 </span>
               </div>
             </div>
           </div>
 
-          <p className="mt-4 label text-[0.65rem] sm:text-xs text-silver/70 font-medium tracking-widest">
+          <p className="mt-4 label text-[0.65rem] sm:text-xs text-forest/70 font-medium tracking-widest">
             {unsealed ? 'The Seal Has Been Broken' : gate.prompt}
           </p>
         </motion.div>
@@ -205,7 +205,7 @@ export default function GateSection() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 text-signal label text-[0.62rem] tracking-widest uppercase"
+            className="flex items-center gap-2 text-blush label text-[0.62rem] tracking-widest uppercase font-semibold"
           >
             <span>Scroll gently to begin</span>
             <ArrowDown size={13} className="animate-bounce" />
@@ -218,7 +218,7 @@ export default function GateSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 1.5 }}
-        className="relative z-10 label text-[0.6rem] text-silver/40 tracking-widest text-center"
+        className="relative z-10 label text-[0.6rem] text-forest/50 tracking-widest text-center"
       >
         {storyData.tagline}
       </motion.p>

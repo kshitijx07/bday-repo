@@ -7,7 +7,6 @@ import { playChime } from '../utils/audio';
 
 function PolaroidCard({
   photo,
-  idx,
   onOpen,
 }: {
   photo: MemoryPhoto;
@@ -54,16 +53,16 @@ function PolaroidCard({
         whileHover={{ scale: 1.03, rotate: 0 }}
         transition={{ duration: 0.35 }}
         onClick={onOpen}
-        className="relative bg-[#F9F7F2] p-3 pb-6 rounded-md shadow-xl border border-silver/30 cursor-pointer select-none group flex flex-col will-change-transform"
+        className="relative bg-[#FFFDF9] p-3 pb-6 rounded-md shadow-md hover:shadow-xl border border-forest/15 cursor-pointer select-none group flex flex-col will-change-transform"
       >
-        {/* Washi Tape Strip at top */}
+        {/* Washi Tape Strip at top in Blush Pink */}
         <div
           aria-hidden="true"
-          className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-5 bg-silver/25 border border-silver/40 rounded-xs shadow-xs backdrop-blur-xs rotate-[-3deg] z-20 pointer-events-none"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-5 bg-blush/35 border border-blush/50 rounded-xs shadow-xs backdrop-blur-xs rotate-[-3deg] z-20 pointer-events-none"
         />
 
         {/* Photo Image Frame */}
-        <div className="relative aspect-[3/4] w-full overflow-hidden bg-charcoal-deep rounded-xs">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#FAF2E4] rounded-xs border border-forest/10">
           <img
             src={photo.src}
             alt={photo.alt}
@@ -71,19 +70,19 @@ function PolaroidCard({
             draggable={false}
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-2.5">
-            <span className="p-2 rounded-full bg-charcoal-deep/80 text-silver-light">
+          <div className="absolute inset-0 bg-forest-darker/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-2.5">
+            <span className="p-2 rounded-full bg-ivory-light/90 text-forest shadow-md">
               <Maximize2 size={14} />
             </span>
           </div>
         </div>
 
-        {/* Handwritten Polaroid Caption */}
+        {/* Handwritten Polaroid Caption in Forest Green */}
         <div className="pt-3 px-1">
-          <h4 className="font-serif text-sm sm:text-base font-normal text-charcoal-deep">
+          <h4 className="font-serif text-sm sm:text-base font-normal text-forest-deep">
             {photo.caption}
           </h4>
-          <p className="font-serif text-xs italic text-charcoal/70 line-clamp-1 mt-0.5">
+          <p className="font-serif text-xs italic text-forest/75 line-clamp-1 mt-0.5">
             {photo.poeticNote}
           </p>
         </div>
@@ -127,18 +126,18 @@ export default function MemoriesSection() {
     >
       <div className="text-center max-w-2xl mx-auto mb-14">
         <div className="flex items-center justify-center gap-2 mb-3">
-          <span className="label text-[0.62rem] sm:text-xs text-signal font-semibold tracking-widest uppercase">
+          <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
             {memoriesSection.label}
           </span>
-          <div className="h-[1px] w-8 bg-silver/20" />
-          <span className="label text-[0.6rem] text-silver/50 tracking-wider">
+          <div className="h-[1px] w-8 bg-forest/20" />
+          <span className="label text-[0.6rem] text-forest/60 tracking-wider">
             {memoriesSection.title}
           </span>
         </div>
-        <h2 className="font-serif text-[clamp(2rem,6vw,4.2rem)] font-light leading-tight text-silver-light">
+        <h2 className="font-serif text-[clamp(2rem,6vw,4.2rem)] font-light leading-tight text-forest-deep">
           {memoriesSection.title}
         </h2>
-        <p className="mt-2 text-xs sm:text-sm text-silver/60">
+        <p className="mt-2 text-xs sm:text-sm text-forest/70">
           {memoriesSection.subtitle}
         </p>
       </div>
@@ -155,7 +154,7 @@ export default function MemoriesSection() {
         ))}
       </div>
 
-      <p className="text-center mt-12 label text-[0.6rem] text-silver/40 tracking-widest italic">
+      <p className="text-center mt-12 label text-[0.6rem] text-forest/50 tracking-widest italic">
         {memoriesSection.microcopy}
       </p>
 
@@ -168,19 +167,19 @@ export default function MemoriesSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-between p-4 sm:p-8 backdrop-blur-2xl bg-charcoal-darker/95"
+            className="fixed inset-0 z-50 flex flex-col items-center justify-between p-4 sm:p-8 backdrop-blur-2xl bg-[#1A372D]/95"
             style={{
               paddingTop: 'max(1.2rem, env(safe-area-inset-top))',
               paddingBottom: 'max(1.2rem, env(safe-area-inset-bottom))',
             }}
           >
             <div className="w-full max-w-4xl flex items-center justify-between">
-              <span className="label text-silver/70 text-xs">
+              <span className="label text-ivory/80 text-xs">
                 Memory {selectedIdx + 1} of {memoriesSection.photos.length}
               </span>
               <button
                 onClick={closeLightbox}
-                className="glass p-2.5 rounded-full text-silver hover:text-signal active:scale-95 transition-all cursor-pointer"
+                className="glass p-2.5 rounded-full text-ivory hover:text-blush active:scale-95 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30"
                 aria-label="Close"
               >
                 <X size={20} />
@@ -197,13 +196,13 @@ export default function MemoriesSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="max-h-[62dvh] max-w-full rounded-md border border-silver/20 object-contain shadow-2xl"
+                  className="max-h-[62dvh] max-w-full rounded-md border border-ivory/30 object-contain shadow-2xl"
                 />
               </AnimatePresence>
-              <h4 className="mt-4 font-serif text-xl sm:text-2xl text-silver-light text-center">
+              <h4 className="mt-4 font-serif text-xl sm:text-2xl text-ivory text-center">
                 {memoriesSection.photos[selectedIdx].caption}
               </h4>
-              <p className="mt-1 font-serif text-xs sm:text-sm italic text-silver/70 text-center max-w-md px-4">
+              <p className="mt-1 font-serif text-xs sm:text-sm italic text-ivory/80 text-center max-w-md px-4">
                 {memoriesSection.photos[selectedIdx].poeticNote}
               </p>
             </div>
@@ -211,17 +210,17 @@ export default function MemoriesSection() {
             <div className="flex items-center gap-6">
               <button
                 onClick={prevPhoto}
-                className="glass p-3 rounded-full text-silver hover:text-signal active:scale-90 transition-all cursor-pointer"
+                className="glass p-3 rounded-full text-ivory hover:text-blush active:scale-90 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30"
                 aria-label="Previous"
               >
                 <ChevronLeft size={20} />
               </button>
-              <span className="text-[0.62rem] label text-silver/50 tracking-widest uppercase">
+              <span className="text-[0.62rem] label text-ivory/60 tracking-widest uppercase">
                 {selectedIdx + 1} / {memoriesSection.photos.length}
               </span>
               <button
                 onClick={nextPhoto}
-                className="glass p-3 rounded-full text-silver hover:text-signal active:scale-90 transition-all cursor-pointer"
+                className="glass p-3 rounded-full text-ivory hover:text-blush active:scale-90 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30"
                 aria-label="Next"
               >
                 <ChevronRight size={20} />

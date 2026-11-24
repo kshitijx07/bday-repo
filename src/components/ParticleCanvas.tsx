@@ -39,24 +39,25 @@ export default function ParticleCanvas() {
     window.addEventListener('resize', onResize, { passive: true });
 
     const particles: Particle[] = [];
-    // Strict cap: 16 particles on mobile, 32 on desktop
-    const count = isTouch ? 16 : 32;
+    // Strict cap: 16 particles on mobile, 30 on desktop
+    const count = isTouch ? 16 : 30;
 
+    // Palette: Blush Pink petals (#F2A7B5), Deeper rose petals, Forest Green botanical dust (#315C4C), Warm gold specks
     const colors = [
-      'rgba(192, 192, 192, 0.35)', // Silver dust
-      'rgba(192, 192, 192, 0.18)',
-      'rgba(225, 6, 0, 0.22)',      // Signal Red subtle petal
-      'rgba(240, 240, 240, 0.25)',  // Ambient stardust
+      'rgba(242, 167, 181, 0.65)', // Blush Pink petal
+      'rgba(226, 134, 152, 0.55)', // Deeper blush rose
+      'rgba(49, 92, 76, 0.25)',    // Forest green botanical dust
+      'rgba(235, 205, 155, 0.45)', // Warm golden dust
     ];
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 4.5 + 2,
+        size: Math.random() * 4.5 + 2.5,
         speedY: Math.random() * 0.35 + 0.15,
         speedX: Math.sin(i) * 0.2,
-        opacity: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.5 + 0.3,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.015,
         type: i % 4 === 0 ? 'petal' : 'dust',
@@ -130,7 +131,7 @@ export default function ParticleCanvas() {
           drawPetal(p.x, p.y, p.size, p.rotation, p.color);
         } else {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, p.size * 0.35, 0, Math.PI * 2);
           ctx.fillStyle = p.color;
           ctx.fill();
         }
@@ -151,7 +152,7 @@ export default function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-60"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-70"
       aria-hidden="true"
     />
   );

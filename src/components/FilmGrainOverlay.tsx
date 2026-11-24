@@ -4,15 +4,15 @@ export default function FilmGrainOverlay() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-40 overflow-hidden"
     >
-      {/* 5% Film Grain Texture */}
-      <div className="film-grain absolute inset-0 opacity-[0.05] mix-blend-screen" />
+      {/* Delicate Smooth Paper Grain Texture */}
+      <div className="film-grain absolute inset-0 opacity-[0.04] mix-blend-multiply" />
 
-      {/* Soft Vignette around screen edges */}
+      {/* Soft Luxury Stationery Edge Vignette */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle at 50% 50%, transparent 65%, rgba(10, 10, 10, 0.6) 100%)',
+            'radial-gradient(circle at 50% 50%, transparent 62%, rgba(226, 209, 185, 0.42) 100%)',
         }}
       />
     </div>

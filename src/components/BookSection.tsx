@@ -35,7 +35,6 @@ export default function BookSection() {
     // Device orientation tilt on phone (gyroscope)
     const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma !== null && e.beta !== null) {
-        // gamma: left-to-right (-90 to 90), beta: front-to-back (-180 to 180)
         const tiltX = Math.max(-0.5, Math.min(0.5, e.gamma / 60));
         const tiltY = Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 60));
         x.set(tiltX);
@@ -64,19 +63,19 @@ export default function BookSection() {
     >
       {/* Chapter header */}
       <div className="flex items-center gap-2 mb-3">
-        <span className="label text-[0.62rem] sm:text-xs text-signal font-semibold tracking-widest uppercase">
+        <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
           {bookSection.label}
         </span>
-        <div className="h-[1px] w-8 bg-silver/20" />
-        <span className="label text-[0.6rem] sm:text-[0.62rem] text-silver/60 tracking-wider">
+        <div className="h-[1px] w-8 bg-forest/20" />
+        <span className="label text-[0.6rem] sm:text-[0.62rem] text-forest/60 tracking-wider">
           {bookSection.year}
         </span>
       </div>
 
-      <h2 className="font-serif text-[clamp(2rem,6vw,4.2rem)] font-light leading-tight text-silver-light mb-2">
+      <h2 className="font-serif text-[clamp(2rem,6vw,4.2rem)] font-light leading-tight text-forest-deep mb-2">
         {bookSection.title}
       </h2>
-      <p className="text-xs sm:text-sm text-silver/60 mb-12">
+      <p className="text-xs sm:text-sm text-forest/70 mb-12">
         {bookSection.subtitle}
       </p>
 
@@ -100,24 +99,24 @@ export default function BookSection() {
           }}
           className="relative transition-transform duration-300"
         >
-          {/* Back Cover */}
+          {/* Back Cover: Rich Forest Green */}
           <div
-            className="absolute inset-0 rounded-r-lg bg-charcoal-deep border border-silver/20"
+            className="absolute inset-0 rounded-r-lg bg-[#1C372E] border border-forest/30"
             style={{ transform: 'translateZ(-14px)' }}
           />
 
-          {/* Realistic Paper Edges (Ivory/Silver layers) */}
+          {/* Realistic Paper Edges (Ivory stacked paper layers) */}
           <div
-            className="absolute inset-y-1 left-2 right-1 rounded-r-md bg-[#F4EDE0]"
+            className="absolute inset-y-1 left-2 right-1 rounded-r-md bg-[#FAF2E4] border border-[#EADBCC]"
             style={{ transform: 'translateZ(-2px)' }}
           />
 
           {/* Under Page Content (Revealed when book opens) */}
           <div
-            className="absolute inset-y-2 left-3 right-2 rounded-r-md bg-[#FFF7E8] p-4 flex flex-col justify-between overflow-hidden shadow-inner"
+            className="absolute inset-y-2 left-3 right-2 rounded-r-md bg-[#FFFDF9] p-4 flex flex-col justify-between overflow-hidden shadow-inner border border-forest/10"
             style={{ transform: 'translateZ(1px)' }}
           >
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md border border-charcoal/20">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md border border-forest/15">
               <img
                 src={bookSection.previewPhoto}
                 alt="Neha preview"
@@ -125,12 +124,12 @@ export default function BookSection() {
                 draggable={false}
               />
             </div>
-            <p className="font-serif text-xs italic text-charcoal-deep text-center mt-2">
-              The moment I knew my heart was yours ❤️
+            <p className="font-serif text-xs italic text-forest-deep text-center mt-2">
+              The moment I knew my heart was yours <span className="text-blush">♥</span>
             </p>
           </div>
 
-          {/* Front Cover (Hinged at the left spine, opens outward) */}
+          {/* Front Cover: Deep Forest Green with Blush Foil Monogram */}
           <motion.div
             initial={false}
             animate={{ rotateY: isOpen ? -160 : 0 }}
@@ -140,38 +139,38 @@ export default function BookSection() {
               transformStyle: 'preserve-3d',
               transform: 'translateZ(14px)',
             }}
-            className="absolute inset-0 rounded-r-lg border border-silver/30 shadow-2xl bg-gradient-to-br from-charcoal via-charcoal-deep to-charcoal-darker flex flex-col justify-between p-6 sm:p-8"
+            className="absolute inset-0 rounded-r-lg border border-forest-light/30 shadow-2xl bg-gradient-to-br from-[#244538] via-[#2F5849] to-[#1A372D] flex flex-col justify-between p-6 sm:p-8"
           >
             <div className="flex justify-between items-start">
-              <span className="label text-[0.55rem] text-silver/60 tracking-widest uppercase">
+              <span className="label text-[0.55rem] text-ivory/70 tracking-widest uppercase">
                 Kept Forever
               </span>
-              <div className="h-2 w-2 rounded-full bg-signal shadow-[0_0_8px_#E10600]" />
+              <div className="h-2 w-2 rounded-full bg-blush shadow-[0_0_8px_#F2A7B5]" />
             </div>
 
             <div className="my-auto py-4">
-              <div className="h-[1px] w-8 bg-signal/60 mx-auto mb-3" />
-              <h3 className="font-serif text-2xl sm:text-3xl text-silver-light font-light italic leading-tight">
+              <div className="h-[1px] w-8 bg-blush/60 mx-auto mb-3" />
+              <h3 className="font-serif text-2xl sm:text-3xl text-ivory font-light italic leading-tight">
                 {bookSection.coverTitle}
               </h3>
-              <div className="h-[1px] w-8 bg-signal/60 mx-auto mt-3" />
+              <div className="h-[1px] w-8 bg-blush/60 mx-auto mt-3" />
             </div>
 
-            <div className="flex items-center justify-between text-[0.58rem] label text-silver/50">
+            <div className="flex items-center justify-between text-[0.58rem] label text-ivory/70">
               <span>By Kshitij</span>
-              <span className="text-signal">Tap to Open</span>
+              <span className="text-blush font-semibold">Tap to Open</span>
             </div>
           </motion.div>
         </motion.div>
 
         {/* Ambient Drop Shadow on Floor */}
         <div
-          className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-6 rounded-full blur-xl bg-black/60"
+          className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-6 rounded-full blur-xl bg-forest-darker/20"
           aria-hidden="true"
         />
       </div>
 
-      <p className="mt-8 label text-[0.6rem] text-silver/40 tracking-widest italic">
+      <p className="mt-8 label text-[0.6rem] text-forest/50 tracking-widest italic">
         {bookSection.microcopy}
       </p>
     </section>

@@ -4,23 +4,48 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Aesthetic Palette: Warm Ivory, Forest Green, Blush Pink
+        ivory: {
+          DEFAULT: '#FFF7E8',
+          light: '#FFFDF9',
+          dark: '#F4E8D0',
+          card: '#FAF2E4',
+          border: 'rgba(49, 92, 76, 0.15)',
+        },
+        forest: {
+          DEFAULT: '#315C4C',
+          deep: '#204034',
+          darker: '#162E25',
+          muted: '#4C7A68',
+          light: '#6F9D8B',
+          faint: 'rgba(49, 92, 76, 0.12)',
+        },
+        blush: {
+          DEFAULT: '#F2A7B5',
+          light: '#FCE6EB',
+          deep: '#E28698',
+          dark: '#CE687D',
+          glow: 'rgba(242, 167, 181, 0.45)',
+          faint: 'rgba(242, 167, 181, 0.18)',
+        },
+        // Mapped Aliases for backward compatibility
         charcoal: {
-          DEFAULT: '#2A2A2A',
-          deep: '#1E1E1E',
-          darker: '#141414',
-          card: '#242424',
-          border: 'rgba(192,192,192,0.15)',
+          DEFAULT: '#FFF7E8',
+          deep: '#FAF2E4',
+          darker: '#162E25',
+          card: '#FFFDF9',
+          border: 'rgba(49, 92, 76, 0.14)',
         },
         silver: {
-          DEFAULT: '#C0C0C0',
-          dim: '#858585',
-          light: '#E6E6E6',
-          faint: 'rgba(192,192,192,0.15)',
+          DEFAULT: '#315C4C',
+          dim: '#527A6C',
+          light: '#204034',
+          faint: 'rgba(49, 92, 76, 0.14)',
         },
         signal: {
-          DEFAULT: '#E10600',
-          glow: 'rgba(225,6,0,0.35)',
-          deep: '#B80500',
+          DEFAULT: '#F2A7B5',
+          glow: 'rgba(242, 167, 181, 0.45)',
+          deep: '#E28698',
         },
       },
       fontFamily: {

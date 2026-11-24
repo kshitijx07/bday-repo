@@ -34,19 +34,19 @@ export default function LetterSection() {
       className="relative min-h-[100dvh] py-24 px-4 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center"
     >
       <div className="flex items-center gap-2 mb-3">
-        <span className="label text-[0.62rem] sm:text-xs text-signal font-semibold tracking-widest uppercase">
+        <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
           {letterSection.label}
         </span>
-        <div className="h-[1px] w-8 bg-silver/20" />
-        <span className="label text-[0.6rem] text-silver/50 tracking-wider">
+        <div className="h-[1px] w-8 bg-forest/20" />
+        <span className="label text-[0.6rem] text-forest/60 tracking-wider">
           Unspoken Truth
         </span>
       </div>
 
-      <h2 className="font-serif text-[clamp(2.1rem,6vw,4.4rem)] font-light leading-tight text-silver-light mb-2">
+      <h2 className="font-serif text-[clamp(2.1rem,6vw,4.4rem)] font-light leading-tight text-forest-deep mb-2">
         {letterSection.title}
       </h2>
-      <p className="text-xs sm:text-sm text-silver/60 mb-12">
+      <p className="text-xs sm:text-sm text-forest/70 mb-12">
         {isOpen ? 'Every word written from the bottom of my heart.' : letterSection.subtitle}
       </p>
 
@@ -54,7 +54,7 @@ export default function LetterSection() {
       <motion.div style={{ y: envelopeY }} className="w-full max-w-2xl">
         <AnimatePresence mode="wait">
           {!isOpen ? (
-            /* Sealed Charcoal Envelope with Red Wax Seal */
+            /* Sealed Forest Green Envelope with Blush Wax Seal */
             <motion.div
               key="envelope"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -67,25 +67,25 @@ export default function LetterSection() {
               tabIndex={0}
               aria-label="Open the love letter"
             >
-              <div className="relative rounded-3xl p-8 sm:p-12 border border-silver/20 bg-charcoal-card shadow-2xl group-hover:border-signal/50 group-hover:shadow-[0_0_30px_rgba(225,6,0,0.2)] transition-all duration-500 overflow-hidden">
+              <div className="relative rounded-3xl p-8 sm:p-12 border border-forest-light/30 bg-gradient-to-br from-[#244538] via-[#2F5A4B] to-[#1A372D] shadow-2xl group-hover:shadow-[0_12px_36px_rgba(49,92,76,0.3)] transition-all duration-500 overflow-hidden">
                 <div className="flex flex-col items-center gap-6">
-                  {/* Wax Seal with Signal Red glow */}
-                  <div className="relative w-18 h-18 rounded-full bg-gradient-to-br from-signal via-signal-deep to-[#7A0200] border border-signal/60 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <span className="font-serif text-sm tracking-widest font-semibold text-silver-light">
+                  {/* Wax Seal with Blush Pink glow */}
+                  <div className="relative w-18 h-18 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <span className="font-serif text-sm tracking-widest font-semibold text-ivory">
                       K &amp; N
                     </span>
                   </div>
 
                   <div className="space-y-1">
-                    <p className="font-serif text-xl sm:text-2xl text-silver-light italic">
+                    <p className="font-serif text-xl sm:text-2xl text-ivory italic">
                       For Neha, With All My Love
                     </p>
-                    <p className="text-xs text-silver/50 font-sans tracking-wide">
+                    <p className="text-xs text-ivory/70 font-sans tracking-wide">
                       Tap to break the seal &amp; unfold
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2 text-signal label text-[0.62rem] font-semibold tracking-widest pt-2">
+                  <div className="flex items-center gap-2 text-blush label text-[0.62rem] font-semibold tracking-widest pt-2">
                     <Mail size={13} />
                     <span>Open Letter</span>
                   </div>
@@ -93,7 +93,7 @@ export default function LetterSection() {
               </div>
             </motion.div>
           ) : (
-            /* Unfolded Vintage Parchment with Inked Reveal */
+            /* Unfolded Vintage Warm Ivory Parchment with Forest Inked Reveal */
             <motion.div
               key="parchment"
               initial={{ opacity: 0, rotateX: 30, scale: 0.9 }}
@@ -101,25 +101,25 @@ export default function LetterSection() {
               exit={{ opacity: 0, rotateX: -20, scale: 0.9 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformPerspective: 1200 }}
-              className="relative text-left rounded-2xl p-6 sm:p-10 md:p-12 bg-[#FFF7E8] text-charcoal-deep shadow-2xl border border-silver/40 overflow-hidden"
+              className="relative text-left rounded-2xl p-6 sm:p-10 md:p-12 bg-[#FFFDF9] text-forest-deep shadow-2xl border border-forest/15 overflow-hidden"
             >
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-charcoal/15 mb-6">
-                <span className="label text-[0.6rem] text-charcoal/50 tracking-widest uppercase">
+              <div className="flex items-center justify-between pb-4 border-b border-forest/15 mb-6">
+                <span className="label text-[0.6rem] text-forest/60 tracking-widest uppercase font-semibold">
                   Written for Neha
                 </span>
-                <div className="h-2 w-2 rounded-full bg-signal" />
+                <div className="h-2 w-2 rounded-full bg-blush shadow-[0_0_6px_#F2A7B5]" />
               </div>
 
               {/* Salutation */}
               <p
-                className="font-serif text-2xl sm:text-3xl text-charcoal-deep mb-6"
+                className="font-serif text-2xl sm:text-3xl text-forest-deep mb-6"
                 style={{ fontFamily: '"Dancing Script", cursive' }}
               >
                 {letterSection.greeting}
               </p>
 
-              {/* Inked Paragraphs */}
+              {/* Inked Paragraphs in Timeless Forest Green */}
               <div className="space-y-5">
                 {letterSection.paragraphs.map((para, idx) => (
                   <motion.p
@@ -127,20 +127,20 @@ export default function LetterSection() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + idx * 0.15, duration: 0.8 }}
-                    className="font-serif text-base sm:text-lg md:text-xl leading-relaxed text-charcoal-deep/90"
+                    className="font-serif text-base sm:text-lg md:text-xl leading-relaxed text-forest-deep/90"
                   >
                     {para}
                   </motion.p>
                 ))}
               </div>
 
-              {/* Red Signoff & Signature */}
-              <div className="mt-8 pt-6 border-t border-charcoal/15 space-y-1">
-                <p className="font-serif text-base sm:text-lg italic text-charcoal/70">
+              {/* Blush Signoff & Signature */}
+              <div className="mt-8 pt-6 border-t border-forest/15 space-y-1">
+                <p className="font-serif text-base sm:text-lg italic text-forest/75">
                   {letterSection.signoff}
                 </p>
                 <p
-                  className="font-serif text-2xl sm:text-3xl text-signal font-normal"
+                  className="font-serif text-2xl sm:text-3xl text-blush-deep font-normal"
                   style={{ fontFamily: '"Dancing Script", cursive' }}
                 >
                   {letterSection.signature}
@@ -151,7 +151,7 @@ export default function LetterSection() {
               <div className="mt-8 flex justify-center sm:justify-end">
                 <button
                   onClick={handleClose}
-                  className="flex items-center gap-2 rounded-full px-4 py-2 text-xs text-charcoal-deep/70 hover:text-charcoal-deep border border-charcoal/20 hover:border-charcoal/40 active:scale-95 transition-all cursor-pointer"
+                  className="flex items-center gap-2 rounded-full px-4 py-2 text-xs text-forest/70 hover:text-forest border border-forest/20 hover:border-forest/40 active:scale-95 transition-all cursor-pointer"
                 >
                   <RotateCcw size={12} />
                   <span>Fold Letter</span>
