@@ -59,7 +59,10 @@ export default function CakeSection() {
   return (
     <section
       id="cake-chapter"
-      className="relative min-h-[100dvh] pt-20 pb-28 px-4 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
+      className="relative min-h-[100dvh] pt-20 px-4 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
+      style={{
+        paddingBottom: 'max(7rem, calc(env(safe-area-inset-bottom, 2rem) + 4rem))',
+      }}
     >
       {/* Dim Screen Aura when candle blown */}
       {blown && (
@@ -98,7 +101,7 @@ export default function CakeSection() {
       </p>
 
       {/* SVG Line-Art Cake with Candle */}
-      <div className="relative z-30 my-10 flex flex-col items-center">
+      <div className="relative z-30 my-8 sm:my-10 flex flex-col items-center">
         {/* Flame with Tap/Hold or Mic interaction */}
         <div className="relative flex flex-col items-center">
           <AnimatePresence mode="wait">
@@ -110,15 +113,15 @@ export default function CakeSection() {
                 exit={{ scale: 0.1, opacity: 0, y: -25 }}
                 transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
                 onClick={handleBlow}
-                className="relative flex justify-center mb-1 cursor-pointer select-none group"
+                className="relative flex items-center justify-center w-16 h-16 mb-1 cursor-pointer select-none group touch-manipulation"
                 role="button"
                 tabIndex={0}
                 aria-label="Blow out the candle flame"
               >
                 {/* Blush Pink Aura Pulse */}
-                <div className="absolute -inset-3 bg-blush rounded-full blur-md opacity-70 animate-pulse" />
-                <div className="relative p-2 rounded-full bg-gradient-to-t from-blush to-amber-100 text-blush-dark shadow-[0_0_18px_#F2A7B5]">
-                  <Flame size={26} className="fill-blush-deep" />
+                <div className="absolute inset-1 bg-blush rounded-full blur-md opacity-70 animate-pulse pointer-events-none" />
+                <div className="relative p-2.5 rounded-full bg-gradient-to-t from-blush to-amber-100 text-blush-dark shadow-[0_0_18px_#F2A7B5] transform active:scale-90 transition-transform">
+                  <Flame size={28} className="fill-blush-deep" />
                 </div>
               </motion.div>
             ) : (
@@ -168,13 +171,13 @@ export default function CakeSection() {
           <div className="flex flex-col items-center gap-2 mt-4">
             <button
               onClick={handleBlow}
-              className="glass label group inline-flex items-center gap-2 rounded-full border border-blush/60 bg-[#FFFDF9] px-6 py-3 text-forest-deep shadow-md hover:border-blush active:scale-95 transition-all cursor-pointer"
+              className="glass label group inline-flex items-center gap-2.5 rounded-full border border-blush/60 bg-[#FFFDF9] px-7 py-3.5 text-forest-deep shadow-md hover:border-blush active:scale-95 transition-all cursor-pointer min-h-[48px] touch-manipulation"
             >
-              <Flame size={14} className="text-blush" />
+              <Flame size={15} className="text-blush" />
               <span className="text-xs font-semibold tracking-wider">Tap to Blow Candle</span>
             </button>
-            <p className="flex items-center gap-1.5 label text-[0.6rem] text-forest/60 tracking-wider mt-1">
-              {micActive && <Mic size={10} className="text-blush animate-pulse" />}
+            <p className="flex items-center gap-1.5 label text-[0.62rem] text-forest/60 tracking-wider mt-1 px-4 text-center">
+              {micActive && <Mic size={11} className="text-blush animate-pulse shrink-0" />}
               <span>{cakeSection.blowInstruction}</span>
             </p>
           </div>
@@ -182,7 +185,7 @@ export default function CakeSection() {
           <div className="flex items-center gap-3 mt-6">
             <button
               onClick={handleRelight}
-              className="glass label flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-forest hover:text-blush border border-forest/20 hover:border-blush active:scale-95 transition-all cursor-pointer bg-[#FFFDF9]"
+              className="glass label flex items-center gap-2 rounded-full px-6 py-3 text-xs text-forest hover:text-blush border border-forest/20 hover:border-blush active:scale-95 transition-all cursor-pointer bg-[#FFFDF9] min-h-[44px] touch-manipulation"
             >
               <RotateCcw size={12} />
               <span>Light Candle Again</span>
@@ -192,7 +195,7 @@ export default function CakeSection() {
       </div>
 
       {/* Featured Celebration Photo */}
-      <div className="relative z-30 w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden border border-forest/15 shadow-xl bg-[#FFFDF9] mb-10">
+      <div className="relative z-30 w-full max-w-[290px] sm:max-w-sm rounded-2xl overflow-hidden border border-forest/15 shadow-xl bg-[#FFFDF9] mb-10">
         <img
           src={cakeSection.photo}
           alt="Neha birthday celebration"
@@ -201,11 +204,11 @@ export default function CakeSection() {
           className="w-full h-auto object-cover"
         />
         <div className="p-4 bg-[#FFFDF9] border-t border-forest/10 text-center">
-          <p className="font-serif text-lg text-forest-deep font-normal">
-            For Neha, The Queen of My Heart
+          <p className="font-serif text-lg sm:text-xl text-forest-deep font-normal tracking-wide">
+            For Neha · My Muse &amp; Endless Gravity
           </p>
-          <p className="label text-[0.62rem] text-blush font-semibold mt-1">
-            Happy Birthday · Forever &amp; Always
+          <p className="label text-[0.62rem] text-blush font-semibold tracking-widest mt-1">
+            November 24 · Endless Devotion
           </p>
         </div>
       </div>
@@ -222,7 +225,7 @@ export default function CakeSection() {
         <div className="flex justify-center gap-4 pt-2">
           <button
             onClick={handleScrollToTop}
-            className="glass flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-forest hover:text-blush border border-forest/20 hover:border-forest/40 active:scale-95 transition-all cursor-pointer bg-[#FFFDF9]"
+            className="glass flex items-center gap-2 rounded-full px-6 py-3 text-xs text-forest hover:text-blush border border-forest/20 hover:border-forest/40 active:scale-95 transition-all cursor-pointer bg-[#FFFDF9] min-h-[44px] touch-manipulation"
           >
             <RotateCcw size={12} />
             <span className="label text-[0.65rem] tracking-wider font-semibold">

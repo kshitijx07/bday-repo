@@ -79,7 +79,11 @@ export default function GateSection() {
   return (
     <section
       id="gate"
-      className="relative min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 pt-16 pb-12 sm:pt-20 sm:pb-16 overflow-hidden max-w-full"
+      className="relative min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 overflow-hidden max-w-full"
+      style={{
+        paddingTop: 'max(4rem, calc(env(safe-area-inset-top, 1rem) + 2rem))',
+        paddingBottom: 'max(2.5rem, calc(env(safe-area-inset-bottom, 1rem) + 1.5rem))',
+      }}
     >
       {/* Top Editorial Badge */}
       <motion.div

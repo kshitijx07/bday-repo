@@ -13,13 +13,13 @@ function Word({
 }) {
   const opacity = useTransform(p, range, [0.18, 1]);
   const y = useTransform(p, range, [12, 0]);
-  const isHighlighted = w.includes('Neha') || w.includes('lifetime') || w.includes('love');
+  const isHighlighted = /Neha|fire|collision|obsession|lifetime|soul/i.test(w);
 
   return (
     <motion.span
       style={{ opacity, y }}
       className={`inline-block mr-[0.28em] ${
-        isHighlighted ? 'text-blush font-normal italic' : 'text-forest-deep'
+        isHighlighted ? 'text-blush font-normal italic drop-shadow-xs' : 'text-forest-deep'
       }`}
     >
       {w}
@@ -81,13 +81,13 @@ export default function PoemSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex flex-col justify-between py-12 opacity-80 overflow-hidden"
       >
-        <ParallaxWord speed={110}>ETERNITY</ParallaxWord>
+        <ParallaxWord speed={110}>ELECTRIC</ParallaxWord>
         <div className="flex justify-end">
           <ParallaxWord speed={-120}>DEVOTION</ParallaxWord>
         </div>
         <ParallaxWord speed={90}>SANCTUARY</ParallaxWord>
         <div className="flex justify-end">
-          <ParallaxWord speed={-140}>FOREVER</ParallaxWord>
+          <ParallaxWord speed={-140}>ETERNITY</ParallaxWord>
         </div>
       </div>
 

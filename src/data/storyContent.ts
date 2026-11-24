@@ -1,6 +1,7 @@
 /* ===========================================================
    STORY CONTENT — NEHA & KSHITIJ
-   Personalized words, memory archive, garden reasons, and letter.
+   Aesthetic, intimate, minimal editorial poetry.
+   Pinterest-style curation, romantic & electric.
    =========================================================== */
 
 const img = (f: string) => `${import.meta.env.BASE_URL}images/${f}`;
@@ -25,142 +26,141 @@ export const storyData = {
   herName: 'Neha',
   hisName: 'Kshitij',
   date: 'November 24',
-  tagline: 'scroll slowly, I made this for you',
+  tagline: 'designed slowly · kept in secret · dedicated to you',
 
   gate: {
-    label: 'A Little Something For You',
+    label: 'Issue No. 24 · Private Archive',
     headline: 'For Neha,',
-    subheadline: 'The girl who makes my entire world softer.',
-    prompt: 'Press & hold the wax seal to enter',
-    footnote: 'A story told across seven chapters',
+    subheadline: 'The muse who turned my chaos into modern poetry.',
+    prompt: 'Hold the wax seal to unlock our frequency',
+    footnote: 'A cinematic journey in seven chapters',
   },
 
   bookSection: {
     label: 'Chapter 01 · The Keepsake',
-    title: 'A Little Book Kept for You',
-    subtitle: 'Tap the book or tilt your screen to open',
-    year: 'Forever & Always',
-    coverTitle: 'For Neha',
+    title: 'Curated in Whispers',
+    subtitle: 'Tilt your screen or tap the spine to unveil what’s inside.',
+    year: 'Unapologetic & Everlasting',
+    coverTitle: 'NEHA',
     previewPhoto: img('intro.jpg'),
-    microcopy: 'every second with you feels like home',
+    microcopy: 'you are the art and the architecture',
   },
 
   poemSection: {
-    label: 'Chapter 02 · The Vow',
-    title: 'What My Soul Already Knows',
-    backgroundWords: ['ETERNITY', 'DEVOTION', 'SANCTUARY', 'FOREVER'],
-    text: 'I have never loved anyone before you, Neha, and I don’t ever want to love anyone after you. For me, there is no one beyond you, no one who could ever take your place. You are the one my heart chose, the one my soul recognizes, and the one I want to love in every lifetime.',
-    microcopy: 'take your time, these words are yours',
+    label: 'Chapter 02 · The Frequency',
+    title: 'Unspoken Gravity',
+    backgroundWords: ['ELECTRIC', 'DEVOTION', 'SANCTUARY', 'ETERNITY'],
+    text: 'I have never loved anyone before you, Neha, and I have zero desire to ever look beyond you. You are the fire in my chest and the calm in my ribs. Beyond reason, beyond time, you are my sweetest obsession, my favorite collision, and the only soul I will choose in every lifetime.',
+    microcopy: 'breathe it in · read between the lines',
   },
 
   memoriesSection: {
-    label: 'Chapter 03 · The Archive',
-    title: 'Small Moments, Kept Close',
-    subtitle: 'Polaroids suspended in light. Tap any photograph to enlarge.',
+    label: 'Chapter 03 · The Gallery',
+    title: 'Frames of Intimacy',
+    subtitle: 'Golden hour shadows, soft glances, and moments that stopped the clock. Tap any frame to expand.',
     photos: [
       {
         src: img('memory-01.jpg'),
         alt: 'In a green dress on a lawn under tall trees',
-        caption: 'Soft green afternoon',
-        poeticNote: 'Where quiet afternoons whispered of forever, and time forgot to run.',
+        caption: '01 / Untamed Silhouette',
+        poeticNote: 'Green silk against the wind. The moment nature realized it had met its match.',
         rotation: -2.5,
       },
       {
         src: img('memory-02.jpg'),
         alt: 'Smiling with a fan against a stone wall',
-        caption: 'Sunlit radiance',
-        poeticNote: 'The sunlight only borrowed its brightness from that smile of yours.',
+        caption: '02 / Sunlit Electricity',
+        poeticNote: 'That reckless, incandescent smile that makes every room surrender.',
         rotation: 3,
       },
       {
         src: img('memory-03.jpg'),
         alt: 'Standing in a misty green landscape beside a tree',
-        caption: 'Somewhere misty and quiet',
-        poeticNote: 'Wherever you stand, the world becomes gentle. Even the mist feels holy.',
+        caption: '03 / Quiet Sanctuary',
+        poeticNote: 'Wrapped in mist and mystery. The only world I ever want to get lost in.',
         rotation: -1.8,
       },
       {
         src: img('memory-04.jpg'),
         alt: 'Walking along a tree-lined path',
-        caption: 'The road beside you',
-        poeticNote: 'I would walk any road on earth, as long as it is alongside your hand.',
+        caption: '04 / Parallel Horizons',
+        poeticNote: 'Every step beside you feels like stepping straight into our own private cinematic universe.',
         rotation: 2.2,
       },
       {
         src: img('memory-06.jpg'),
         alt: 'Mirror selfie in a red sweater',
-        caption: 'Warmth in winter',
-        poeticNote: 'The only warmth I will ever seek when cold winds blow.',
+        caption: '05 / Velvet & Heat',
+        poeticNote: 'Crimson warmth and casual perfection. You make effortless look like high fashion.',
         rotation: -3,
       },
     ] as MemoryPhoto[],
-    microcopy: 'captured in time, kept in my heart',
+    microcopy: 'captured on 35mm film of the mind',
   },
 
   gardenSection: {
-    label: 'Chapter 04 · The Garden',
-    title: 'Four Blooms for You',
-    subtitle: 'Tap each flower to reveal what made my soul choose you.',
+    label: 'Chapter 04 · The Botanicals',
+    title: 'Four Shades of Devotion',
+    subtitle: 'Tap each bloom to reveal the unspoken magnetism.',
     flowers: [
       {
         id: 'rose',
-        name: 'The Rose',
+        name: 'The Crimson Rose',
         flowerType: 'rose',
-        meaning: 'Deepest Affection',
+        meaning: 'Visceral Devotion',
         reason:
-          'Because your love is not fragile—it is steadfast, tender, and the only sanctuary where my heart feels completely safe.',
+          'Because you aren’t just a gentle wave—you’re the entire midnight tide pulling me under, and I never want to surface again.',
       },
       {
         id: 'daisy',
-        name: 'The Daisy',
+        name: 'The Sunlit Bloom',
         flowerType: 'daisy',
-        meaning: 'Pure Joy',
+        meaning: 'Electric Euphoria',
         reason:
-          'Because of the effortless light you bring into every room. You can take the heaviest day and turn it gentle with just one smile.',
+          'Because that raw, radiant energy of yours turns the heaviest days into effortless music. You are pure, untamed light.',
       },
       {
         id: 'tulip',
-        name: 'The Tulip',
+        name: 'The Velvet Tulip',
         flowerType: 'tulip',
-        meaning: 'Perfect Harmony',
+        meaning: 'Cosmic Alignment',
         reason:
-          'Because beyond physical logic, beyond words or paper, our souls fit together like they were sculpted from the very same star.',
+          'Because our frequencies locked together before we even had words for what we were. You feel like destiny with a pulse.',
       },
       {
         id: 'wildflower',
-        name: 'The Wildflower',
+        name: 'The Wild Orchid',
         flowerType: 'wildflower',
-        meaning: 'Enduring Grace',
+        meaning: 'Intoxicating Grace',
         reason:
-          'Because you are so much braver and more magnificent than you ever give yourself credit for. You bloom even when the ground is stone.',
+          'Because you are soft yet dangerous, fierce yet gentle. You bloom with a quiet confidence that completely disarms me.',
       },
     ] as FlowerReason[],
-    microcopy: 'every petal holds a truth',
+    microcopy: 'delicate petals · relentless devotion',
   },
 
   letterSection: {
-    label: 'Chapter 05 · The Unspoken Letter',
-    title: 'From My Heart to Yours',
-    subtitle: 'Tap to break the wax seal and unfold the parchment.',
-    greeting: 'My dearest Neha,',
+    label: 'Chapter 05 · The Monologue',
+    title: 'Inked in the Dark',
+    subtitle: 'Tap the wax seal to unfold the handwritten parchment.',
+    greeting: 'My sweet, intoxicating Neha,',
     paragraphs: [
-      'I am not always good at saying things out loud the way I mean them, so I wrote them down here.',
-      'I love you beyond anything, beyond words, beyond everything this world could ever explain. My soul has already accepted you as its partner, and every heartbeat of mine belongs to you. Beyond physical logic, beyond any paper, promise, or validation, you are my companion, my love, my home, and my whole world.',
-      'I have never loved anyone before you, and I don’t ever want to love anyone after you. For me, there is no one beyond you, no one who could ever take your place. You are the one my heart chose, the one my soul recognizes, and the one I want to love in every lifetime.',
-      'And even if death separates us in this life, I hope that somewhere, somehow, I find my way back to you in the next one. I would choose you again, love you again, and find you again, no matter how many lifetimes it takes.',
-      'You are, and always will be, my love. Forever doesn’t feel long enough for what I feel for you.',
+      'I don’t believe in half-hearted loves or lukewarm promises. With you, everything is full volume, electric, and breathtakingly real.',
+      'I love you beyond words, beyond logic, beyond anything this world could ever rationalize. You are not just someone I love—you are the rhythm beneath my ribs, my favorite conversation, my wildest dream, and the calmest shore I’ve ever touched.',
+      'I never loved anyone before you, and no one will ever exist after you. You are the only one who holds the key to every room inside my soul. Even if lifetimes reset, I would cross every constellation to find you and make you mine all over again.',
+      'Thank you for existing, for being your fiercely radiant, gorgeous, magnetic self. Loving you is the easiest and most exhilarating thing I have ever done.',
     ],
-    signoff: 'Always and in every lifetime,',
-    signature: 'Yours, Kshitij ❤️🫶🏻',
+    signoff: 'Completely & irrevocably yours,',
+    signature: 'Kshitij 🫶🏻',
   },
 
   cakeSection: {
-    label: 'Chapter 06 · The Finale',
-    headline: ['Happy Birthday,', 'Neha ❤️'],
+    label: 'Chapter 06 · The Midnight Wish',
+    headline: ['Happy Birthday,', 'Neha'],
     message:
-      'I hope today is gentle and full of everything your beautiful heart loves. May this year feel the way you make other people feel.',
-    closing: '— With infinite love, Kshitij 🫶🏻',
-    blowInstruction: 'Blow into your phone microphone, or press & hold the candle flame to blow it out ✨',
+      'To the girl who carries stardust in her eyes and fire in her soul. May this year be as magnetic, luxurious, and beautiful as you are.',
+    closing: '— Forever entangled with you, Kshitij 🫶🏻',
+    blowInstruction: 'Blow into your microphone or tap the flame to make a wish ✨',
     photo: img('finale.jpg'),
   },
 };

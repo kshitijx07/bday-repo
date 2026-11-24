@@ -124,15 +124,15 @@ export default function BookSection() {
                 draggable={false}
               />
             </div>
-            <p className="font-serif text-xs italic text-forest-deep text-center mt-2">
-              The moment I knew my heart was yours <span className="text-blush">♥</span>
+            <p className="font-serif text-xs italic text-forest-deep text-center mt-2 tracking-wide">
+              The exact frame where time forgot how to move <span className="text-blush">✨</span>
             </p>
           </div>
 
           {/* Front Cover: Deep Forest Green with Blush Foil Monogram */}
           <motion.div
             initial={false}
-            animate={{ rotateY: isOpen ? -160 : 0 }}
+            animate={{ rotateY: isOpen ? -145 : 0 }}
             transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1] }}
             style={{
               transformOrigin: 'left center',

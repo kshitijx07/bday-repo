@@ -169,8 +169,8 @@ export default function MemoriesSection() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex flex-col items-center justify-between p-4 sm:p-8 backdrop-blur-2xl bg-[#1A372D]/95"
             style={{
-              paddingTop: 'max(1.2rem, env(safe-area-inset-top))',
-              paddingBottom: 'max(1.2rem, env(safe-area-inset-bottom))',
+              paddingTop: 'max(1.8rem, calc(env(safe-area-inset-top, 1rem) + 1.2rem))',
+              paddingBottom: 'max(2.2rem, calc(env(safe-area-inset-bottom, 1rem) + 1.8rem))',
             }}
           >
             <div className="w-full max-w-4xl flex items-center justify-between">
@@ -179,7 +179,7 @@ export default function MemoriesSection() {
               </span>
               <button
                 onClick={closeLightbox}
-                className="glass p-2.5 rounded-full text-ivory hover:text-blush active:scale-95 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30"
+                className="glass min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full text-ivory hover:text-blush active:scale-95 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30 touch-manipulation"
                 aria-label="Close"
               >
                 <X size={20} />
@@ -196,10 +196,10 @@ export default function MemoriesSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="max-h-[62dvh] max-w-full rounded-md border border-ivory/30 object-contain shadow-2xl"
+                  className="max-h-[58dvh] max-w-full rounded-md border border-ivory/30 object-contain shadow-2xl"
                 />
               </AnimatePresence>
-              <h4 className="mt-4 font-serif text-xl sm:text-2xl text-ivory text-center">
+              <h4 className="mt-3 font-serif text-lg sm:text-2xl text-ivory text-center tracking-wide">
                 {memoriesSection.photos[selectedIdx].caption}
               </h4>
               <p className="mt-1 font-serif text-xs sm:text-sm italic text-ivory/80 text-center max-w-md px-4">
@@ -210,20 +210,20 @@ export default function MemoriesSection() {
             <div className="flex items-center gap-6">
               <button
                 onClick={prevPhoto}
-                className="glass p-3 rounded-full text-ivory hover:text-blush active:scale-90 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30"
+                className="glass min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full text-ivory hover:text-blush active:scale-90 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30 touch-manipulation"
                 aria-label="Previous"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={22} />
               </button>
-              <span className="text-[0.62rem] label text-ivory/60 tracking-widest uppercase">
+              <span className="text-[0.62rem] label text-ivory/60 tracking-widest uppercase font-semibold">
                 {selectedIdx + 1} / {memoriesSection.photos.length}
               </span>
               <button
                 onClick={nextPhoto}
-                className="glass p-3 rounded-full text-ivory hover:text-blush active:scale-90 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30"
+                className="glass min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full text-ivory hover:text-blush active:scale-90 transition-all cursor-pointer bg-forest-darker/60 border-forest-light/30 touch-manipulation"
                 aria-label="Next"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={22} />
               </button>
             </div>
           </motion.div>,

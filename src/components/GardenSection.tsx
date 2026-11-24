@@ -175,30 +175,34 @@ export default function GardenSection() {
         {gardenSection.subtitle}
       </p>
 
-      {/* The 4 Self-Drawing Flowers Row */}
-      <div className="flex justify-center gap-3 sm:gap-6 flex-wrap mb-10">
+      {/* The 4 Self-Drawing Flowers 2x2 on Mobile, 4x1 on Desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-3xl mb-10 px-1">
         {gardenSection.flowers.map((f: FlowerReason) => {
           const isSelected = f.id === activeFlowerId;
           return (
             <button
               key={f.id}
               onClick={() => handleBloom(f.id)}
-              className={`flex flex-col items-center p-3 sm:p-4 rounded-xl border transition-all cursor-pointer ${
+              className={`flex flex-col items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 cursor-pointer touch-manipulation active:scale-95 ${
                 isSelected
-                  ? 'bg-ivory-light border-blush shadow-md'
-                  : 'bg-[#FFFDF9] border-forest/15 hover:border-forest/30'
+                  ? 'bg-ivory-light border-blush shadow-[0_8px_20px_rgba(242,167,181,0.25)]'
+                  : 'bg-[#FFFDF9] border-forest/15 hover:border-forest/30 shadow-xs'
               }`}
             >
-              <div className="mb-2">
+              <div className="mb-1 flex items-center justify-center">
                 {f.id === 'rose' && <RoseSVG isBloomed={isSelected} />}
                 {f.id === 'daisy' && <DaisySVG isBloomed={isSelected} />}
                 {f.id === 'tulip' && <TulipSVG isBloomed={isSelected} />}
                 {f.id === 'wildflower' && <WildflowerSVG isBloomed={isSelected} />}
               </div>
-              <span className="font-serif text-sm text-forest-deep">{f.name}</span>
-              <span className="label text-[0.55rem] text-blush tracking-wider mt-0.5">
-                {f.meaning}
-              </span>
+              <div className="text-center w-full">
+                <span className="font-serif text-sm sm:text-base text-forest-deep block leading-tight">
+                  {f.name}
+                </span>
+                <span className="label text-[0.55rem] text-blush tracking-wider mt-1 block">
+                  {f.meaning}
+                </span>
+              </div>
             </button>
           );
         })}

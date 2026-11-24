@@ -21,7 +21,7 @@ export default function AudioToggle() {
     <button
       onClick={handleToggle}
       aria-label={playing ? 'Mute ambient soundtrack' : 'Unmute ambient soundtrack'}
-      className="glass group flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs text-forest border border-forest/20 hover:border-forest/40 shadow-md transition-all duration-300 active:scale-95 bg-ivory-light/90 backdrop-blur-md cursor-pointer"
+      className="glass group flex items-center gap-2 rounded-full px-4 py-2 text-xs text-forest border border-forest/20 hover:border-forest/40 shadow-md transition-all duration-300 active:scale-95 bg-ivory-light/90 backdrop-blur-md cursor-pointer min-h-[44px] touch-manipulation"
     >
       {playing ? (
         <>

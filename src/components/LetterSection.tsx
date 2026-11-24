@@ -67,27 +67,27 @@ export default function LetterSection() {
               tabIndex={0}
               aria-label="Open the love letter"
             >
-              <div className="relative rounded-3xl p-8 sm:p-12 border border-forest-light/30 bg-gradient-to-br from-[#244538] via-[#2F5A4B] to-[#1A372D] shadow-2xl group-hover:shadow-[0_12px_36px_rgba(49,92,76,0.3)] transition-all duration-500 overflow-hidden">
-                <div className="flex flex-col items-center gap-6">
+              <div className="relative rounded-3xl p-6 sm:p-12 border border-forest-light/30 bg-gradient-to-br from-[#244538] via-[#2F5A4B] to-[#1A372D] shadow-2xl group-hover:shadow-[0_12px_36px_rgba(49,92,76,0.3)] transition-all duration-500 overflow-hidden">
+                <div className="flex flex-col items-center gap-5 sm:gap-6">
                   {/* Wax Seal with Blush Pink glow */}
-                  <div className="relative w-18 h-18 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <span className="font-serif text-sm tracking-widest font-semibold text-ivory">
                       K &amp; N
                     </span>
                   </div>
 
                   <div className="space-y-1">
-                    <p className="font-serif text-xl sm:text-2xl text-ivory italic">
-                      For Neha, With All My Love
+                    <p className="font-serif text-xl sm:text-2xl text-ivory italic tracking-wide">
+                      For Neha · In Quiet Devotion
                     </p>
                     <p className="text-xs text-ivory/70 font-sans tracking-wide">
-                      Tap to break the seal &amp; unfold
+                      Tap the seal to unfold what’s unsaid
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2 text-blush label text-[0.62rem] font-semibold tracking-widest pt-2">
+                  <div className="flex items-center gap-2 text-blush label text-[0.62rem] font-semibold tracking-widest pt-1">
                     <Mail size={13} />
-                    <span>Open Letter</span>
+                    <span>Unfold Monologue</span>
                   </div>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function LetterSection() {
               <div className="mt-8 flex justify-center sm:justify-end">
                 <button
                   onClick={handleClose}
-                  className="flex items-center gap-2 rounded-full px-4 py-2 text-xs text-forest/70 hover:text-forest border border-forest/20 hover:border-forest/40 active:scale-95 transition-all cursor-pointer"
+                  className="flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-forest/70 hover:text-forest border border-forest/20 hover:border-forest/40 active:scale-95 transition-all cursor-pointer min-h-[44px] touch-manipulation"
                 >
                   <RotateCcw size={12} />
                   <span>Fold Letter</span>
