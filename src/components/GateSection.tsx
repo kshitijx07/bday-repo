@@ -29,6 +29,14 @@ export default function GateSection() {
     }
   };
 
+  const scrollToBook = () => {
+    const bookEl = document.getElementById('book-chapter');
+    if (bookEl) {
+      const top = bookEl.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
+
   const handleUnlock = () => {
     playChime(659.25, 2.5, 0.1);
     startAmbientLoop();
@@ -36,15 +44,7 @@ export default function GateSection() {
     setUnsealed(true);
 
     setTimeout(() => {
-      const bookEl = document.getElementById('book-chapter');
-      if (bookEl) {
-        const lenis = getLenis();
-        if (lenis && typeof lenis.scrollTo === 'function') {
-          lenis.scrollTo(bookEl, { offset: -10, duration: 1.4 });
-        } else {
-          bookEl.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
+      scrollToBook();
     }, 450);
   };
 
@@ -206,14 +206,15 @@ export default function GateSection() {
         </motion.div>
 
         {unsealed && (
-          <motion.div
+          <motion.button
+            onClick={scrollToBook}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 text-blush label text-[0.62rem] tracking-widest uppercase font-semibold"
+            className="flex items-center gap-2 text-forest-deep label text-[0.68rem] tracking-widest uppercase font-semibold mt-2 px-6 py-3 rounded-full bg-blush/20 border border-blush/50 hover:bg-blush/30 active:scale-95 transition-all cursor-pointer touch-manipulation min-h-[44px]"
           >
-            <span>Scroll gently to begin</span>
-            <ArrowDown size={13} className="animate-bounce" />
-          </motion.div>
+            <span>Begin The Journey</span>
+            <ArrowDown size={14} className="text-blush animate-bounce" />
+          </motion.button>
         )}
       </div>
 

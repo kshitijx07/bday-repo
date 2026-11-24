@@ -28,23 +28,44 @@ export default function CakeSection() {
     }
   };
 
-  // Listen to mic for breath/blow when in viewport
+  // Listen to mic for breath/blow ONLY when CakeSection is actually in viewport
   useEffect(() => {
     if (blown) return;
 
+    const sectionEl = document.getElementById('cake-chapter');
+    if (!sectionEl) return;
+
     let mounted = true;
-    listenForBlow(() => {
-      if (mounted) handleBlow();
-    }).then((cleanup) => {
-      if (mounted) {
-        cleanupMicRef.current = cleanup;
-        setMicActive(true);
-      }
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !blown && !cleanupMicRef.current) {
+          listenForBlow(() => {
+            if (mounted) handleBlow();
+          }).then((cleanup) => {
+            if (mounted) {
+              cleanupMicRef.current = cleanup;
+              setMicActive(true);
+            }
+          });
+        } else if (!entry.isIntersecting && cleanupMicRef.current) {
+          cleanupMicRef.current();
+          cleanupMicRef.current = null;
+          setMicActive(false);
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(sectionEl);
 
     return () => {
       mounted = false;
-      if (cleanupMicRef.current) cleanupMicRef.current();
+      observer.disconnect();
+      if (cleanupMicRef.current) {
+        cleanupMicRef.current();
+        cleanupMicRef.current = null;
+      }
     };
   }, [blown]);
 

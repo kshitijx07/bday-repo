@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
-interface Ripple {
-  id: number;
-  x: number;
-  y: number;
-}
-
 export default function CustomCursor() {
   const reduce = useReducedMotion();
   const [isFine, setIsFine] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [ripples, setRipples] = useState<Ripple[]>([]);
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -22,59 +15,27 @@ export default function CustomCursor() {
   useEffect(() => {
     if (reduce) return;
 
+    // Only activate on devices with fine pointer (mouse / trackpad)
     const fine = window.matchMedia('(pointer: fine)').matches;
     setIsFine(fine);
 
-    if (fine) {
-      // Desktop mouse tracker
-      const onMove = (e: MouseEvent) => {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
-        const target = e.target as HTMLElement | null;
-        setHovered(
-          !!target?.closest('button, a, [role="button"], [data-clickable], input'),
-        );
-      };
-      window.addEventListener('mousemove', onMove, { passive: true });
-      return () => window.removeEventListener('mousemove', onMove);
-    } else {
-      // Mobile touch ripples
-      const onTouch = (e: TouchEvent) => {
-        if (!e.touches[0]) return;
-        const newRipple: Ripple = {
-          id: Date.now(),
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        };
-        setRipples((prev) => [...prev.slice(-3), newRipple]);
-        setTimeout(() => {
-          setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-        }, 650);
-      };
-      window.addEventListener('touchstart', onTouch, { passive: true });
-      return () => window.removeEventListener('touchstart', onTouch);
-    }
+    if (!fine) return; // Completely bail out on touch devices (zero overhead on mobile)
+
+    const onMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      const target = e.target as HTMLElement | null;
+      setHovered(
+        !!target?.closest('button, a, [role="button"], [data-clickable], input'),
+      );
+    };
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
   }, [reduce, mouseX, mouseY]);
 
-  if (reduce) return null;
-
-  // Mobile Touch Ripples (Blush Pink)
-  if (!isFine) {
-    return (
-      <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden" aria-hidden="true">
-        {ripples.map((r) => (
-          <motion.span
-            key={r.id}
-            initial={{ scale: 0.2, opacity: 0.7 }}
-            animate={{ scale: 2.2, opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            style={{ left: r.x, top: r.y }}
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-blush/60 bg-blush/20 w-8 h-8 pointer-events-none"
-          />
-        ))}
-      </div>
-    );
-  }
+  // On mobile / touch devices or reduced motion, render nothing (pure 120Hz native touch response)
+  if (reduce || !isFine) return null;
 
   // Desktop Cursor: Forest Green dot that turns into Blush Pink Heart on clickable hover
   return (

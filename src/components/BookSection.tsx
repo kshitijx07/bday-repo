@@ -38,11 +38,15 @@ export default function BookSection() {
       y.set(Math.max(-0.5, Math.min(0.5, normY)));
     };
 
-    // Device orientation tilt on phone (gyroscope)
+    // Device orientation tilt on phone (throttled to 25fps for battery & smoothness)
+    let lastOri = 0;
     const handleOrientation = (e: DeviceOrientationEvent) => {
+      const now = performance.now();
+      if (now - lastOri < 40) return;
+      lastOri = now;
       if (e.gamma !== null && e.beta !== null) {
-        const tiltX = Math.max(-0.5, Math.min(0.5, e.gamma / 60));
-        const tiltY = Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 60));
+        const tiltX = Math.max(-0.4, Math.min(0.4, e.gamma / 55));
+        const tiltY = Math.max(-0.4, Math.min(0.4, (e.beta - 45) / 55));
         x.set(tiltX);
         y.set(tiltY);
       }
@@ -347,6 +351,7 @@ export default function BookSection() {
               transformOrigin: 'left center',
               transformStyle: 'preserve-3d',
               transform: 'translateZ(14px)',
+              pointerEvents: isOpen ? 'none' : 'auto',
             }}
             className="absolute inset-0 rounded-r-2xl border border-forest-light/30 shadow-2xl bg-gradient-to-br from-[#244538] via-[#2F5849] to-[#1A372D] flex flex-col justify-between p-6 sm:p-8 cursor-pointer group"
           >

@@ -39,28 +39,27 @@ export default function ParticleCanvas() {
     window.addEventListener('resize', onResize, { passive: true });
 
     const particles: Particle[] = [];
-    // Strict cap: 16 particles on mobile, 30 on desktop
-    const count = isTouch ? 16 : 30;
+    // Strict lightweight cap: 10 particles on mobile for 120Hz iPhone smoothness, 22 on desktop
+    const count = isTouch ? 10 : 22;
 
-    // Palette: Blush Pink petals (#F2A7B5), Deeper rose petals, Forest Green botanical dust (#315C4C), Warm gold specks
     const colors = [
-      'rgba(242, 167, 181, 0.65)', // Blush Pink petal
-      'rgba(226, 134, 152, 0.55)', // Deeper blush rose
-      'rgba(49, 92, 76, 0.25)',    // Forest green botanical dust
-      'rgba(235, 205, 155, 0.45)', // Warm golden dust
+      'rgba(242, 167, 181, 0.6)', // Blush Pink petal
+      'rgba(226, 134, 152, 0.5)', // Deeper blush rose
+      'rgba(49, 92, 76, 0.22)',   // Forest green botanical dust
+      'rgba(235, 205, 155, 0.4)', // Warm golden dust
     ];
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 4.5 + 2.5,
-        speedY: Math.random() * 0.35 + 0.15,
-        speedX: Math.sin(i) * 0.2,
-        opacity: Math.random() * 0.5 + 0.3,
+        size: Math.random() * 3.5 + 2,
+        speedY: Math.random() * 0.3 + 0.12,
+        speedX: Math.sin(i) * 0.15,
+        opacity: Math.random() * 0.4 + 0.25,
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.015,
-        type: i % 4 === 0 ? 'petal' : 'dust',
+        rotationSpeed: (Math.random() - 0.5) * 0.012,
+        type: i % 3 === 0 ? 'petal' : 'dust',
         color: colors[i % colors.length],
       });
     }
@@ -95,11 +94,17 @@ export default function ParticleCanvas() {
     };
     document.addEventListener('visibilitychange', handleVisibility);
 
-    const render = () => {
-      if (!isVisible) {
-        animId = requestAnimationFrame(render);
-        return;
-      }
+    let lastFrameTime = 0;
+    const targetFpsInterval = isTouch ? 1000 / 40 : 1000 / 60; // 40fps on mobile to save GPU battery, 60fps on desktop
+
+    const render = (currentTime: number) => {
+      animId = requestAnimationFrame(render);
+
+      if (!isVisible) return;
+
+      const elapsed = currentTime - lastFrameTime;
+      if (elapsed < targetFpsInterval) return;
+      lastFrameTime = currentTime - (elapsed % targetFpsInterval);
 
       ctx.clearRect(0, 0, width, height);
 
@@ -107,16 +112,16 @@ export default function ParticleCanvas() {
         const p = particles[i];
 
         p.y += p.speedY;
-        p.x += Math.sin(p.y * 0.01) * 0.3 + p.speedX;
+        p.x += Math.sin(p.y * 0.01) * 0.25 + p.speedX;
         p.rotation += p.rotationSpeed;
 
         if (!isTouch) {
           const dx = p.x - mouseX;
           const dy = p.y - mouseY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 70) {
-            p.x += (dx / dist) * 1.2;
-            p.y += (dy / dist) * 1.2;
+          if (dist < 60) {
+            p.x += (dx / dist) * 1.0;
+            p.y += (dy / dist) * 1.0;
           }
         }
 
@@ -136,11 +141,9 @@ export default function ParticleCanvas() {
           ctx.fill();
         }
       }
-
-      animId = requestAnimationFrame(render);
     };
 
-    render();
+    animId = requestAnimationFrame(render);
 
     return () => {
       cancelAnimationFrame(animId);
@@ -152,7 +155,7 @@ export default function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-60 will-change-transform"
       aria-hidden="true"
     />
   );

@@ -2,10 +2,11 @@ export default function FilmGrainOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-40 overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-40 overflow-hidden will-change-transform"
+      style={{ transform: 'translateZ(0)' }}
     >
       {/* Delicate Smooth Paper Grain Texture */}
-      <div className="film-grain absolute inset-0 opacity-[0.04] mix-blend-multiply" />
+      <div className="film-grain absolute inset-0 opacity-[0.035] mix-blend-multiply" />
 
       {/* Soft Luxury Stationery Edge Vignette */}
       <div

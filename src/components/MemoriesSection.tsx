@@ -33,6 +33,7 @@ function PolaroidCard({
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return; // Pure native scroll on mobile
     const rect = cardRef.current.getBoundingClientRect();
     x.set((e.clientX - rect.left) / rect.width - 0.5);
     y.set((e.clientY - rect.top) / rect.height - 0.5);
