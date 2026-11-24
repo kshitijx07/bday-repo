@@ -144,13 +144,7 @@ export const storyData = {
         poeticNote: 'I would walk any road on earth, as long as it leads alongside your steps.',
         ratio: '3 / 4',
       },
-      {
-        src: img('memory-05.jpg'),
-        alt: 'A pink water lily in a pond',
-        caption: 'Quiet Serenity',
-        poeticNote: 'Like a lotus resting on still waters—gentle, pure, and infinitely lovely.',
-        ratio: '3 / 4',
-      },
+
       {
         src: img('memory-06.jpg'),
         alt: 'Selfie in red sweater',

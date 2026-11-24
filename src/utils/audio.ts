@@ -5,31 +5,23 @@
  */
 
 let audioCtx: AudioContext | null = null;
-let isPlaying = false;
+let isPlaying = true; // Enabled by default
 let loopTimer: number | null = null;
+let userMuted = false;
 
 // Pentatonic warm scale (F Major / D Minor Pentatonic)
-const SCALE = [
-  349.23, // F4
-  392.00, // G4
-  440.00, // A4
-  523.25, // C5
-  587.33, // D5
-  698.46, // F5
-  880.00, // A5
-  1046.50, // C6
-];
-
 const CHORDS = [
-  [349.23, 440.00, 523.25, 880.00], // Fmaj7
-  [293.66, 440.00, 587.33, 880.00], // Dm7
-  [392.00, 440.00, 523.25, 698.46], // Gsus
-  [261.63, 392.00, 523.25, 659.25], // C add9
+  [349.23, 440.0, 523.25, 880.0], // Fmaj7
+  [293.66, 440.0, 587.33, 880.0], // Dm7
+  [392.0, 440.0, 523.25, 698.46], // Gsus
+  [261.63, 392.0, 523.25, 659.25], // C add9
 ];
 
 function getContext(): AudioContext {
   if (!audioCtx) {
-    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     audioCtx = new AudioContextClass();
   }
   if (audioCtx.state === 'suspended') {
@@ -73,11 +65,11 @@ export function playChime(freq = 523.25, duration = 2.4, gainLevel = 0.08) {
 
 /** Play a gentle arpeggio chord */
 function playArpeggio() {
-  if (!isPlaying) return;
+  if (!isPlaying || userMuted) return;
   const chord = CHORDS[Math.floor(Math.random() * CHORDS.length)];
   chord.forEach((freq, idx) => {
     setTimeout(() => {
-      if (!isPlaying) return;
+      if (!isPlaying || userMuted) return;
       playChime(freq, 3.2, 0.05);
     }, idx * 320);
   });
@@ -85,6 +77,7 @@ function playArpeggio() {
 
 export function startAmbientMusic(): boolean {
   try {
+    userMuted = false;
     const ctx = getContext();
     if (ctx.state === 'suspended') {
       ctx.resume();
@@ -93,7 +86,7 @@ export function startAmbientMusic(): boolean {
     playArpeggio();
     if (loopTimer) clearInterval(loopTimer);
     loopTimer = window.setInterval(() => {
-      if (isPlaying) {
+      if (isPlaying && !userMuted) {
         playArpeggio();
       }
     }, 4200);
@@ -104,6 +97,7 @@ export function startAmbientMusic(): boolean {
 }
 
 export function stopAmbientMusic() {
+  userMuted = true;
   isPlaying = false;
   if (loopTimer) {
     clearInterval(loopTimer);
@@ -122,4 +116,44 @@ export function toggleAmbientMusic(): boolean {
 
 export function getAudioState(): boolean {
   return isPlaying;
+}
+
+// Auto-start ambient music on page load or on first user gesture (to respect browser policies)
+if (typeof window !== 'undefined') {
+  const tryAutoPlay = () => {
+    if (userMuted) return;
+    try {
+      const ctx = getContext();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+      startAmbientMusic();
+    } catch {
+      // Will be triggered by user gesture
+    }
+  };
+
+  // Attempt right away
+  window.addEventListener('DOMContentLoaded', tryAutoPlay);
+
+  // Resume immediately on any initial gesture if blocked by autoplay policy
+  const onFirstInteraction = () => {
+    if (!userMuted && !isPlaying) {
+      startAmbientMusic();
+    } else if (!userMuted) {
+      try {
+        const ctx = getContext();
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  };
+
+  window.addEventListener('pointerdown', onFirstInteraction, { passive: true });
+  window.addEventListener('scroll', onFirstInteraction, { passive: true, once: true });
+  window.addEventListener('touchstart', onFirstInteraction, { passive: true, once: true });
+  window.addEventListener('keydown', onFirstInteraction, { passive: true, once: true });
 }
