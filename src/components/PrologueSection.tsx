@@ -4,6 +4,7 @@ import { ArrowDown, Sparkles } from 'lucide-react';
 import Heart from './Heart';
 import { storyData } from '../data/storyContent';
 import { playChime } from '../utils/audio';
+import { getLenis } from '../utils/motion';
 
 export default function PrologueSection() {
   const { prologue } = storyData;
@@ -49,11 +50,27 @@ export default function PrologueSection() {
     setBtnOffset({ x: 0, y: 0 });
   };
 
-  const handleBegin = () => {
+  const handleBegin = (e?: React.MouseEvent) => {
+    e?.preventDefault();
     playChime(659.25, 2.0, 0.09);
-    const target = document.getElementById('story-light') || document.getElementById('recognition');
+
+    const target =
+      document.getElementById('story-light') ||
+      document.getElementById('truths') ||
+      document.getElementById('archive');
+
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      const lenis = getLenis();
+      if (lenis && typeof lenis.scrollTo === 'function') {
+        lenis.scrollTo(target, { offset: -20, duration: 1.2 });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      window.scrollTo({
+        top: window.innerHeight * 0.95,
+        behavior: 'smooth',
+      });
     }
   };
 

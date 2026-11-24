@@ -93,6 +93,7 @@ export default function StoryLightSection() {
 
   return (
     <section
+      id="story-light"
       ref={containerRef}
       className="relative min-h-[95dvh] py-20 sm:py-28 px-5 sm:px-8 max-w-6xl mx-auto flex flex-col justify-center"
     >
