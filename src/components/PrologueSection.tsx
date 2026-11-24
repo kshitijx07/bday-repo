@@ -18,7 +18,7 @@ export default function PrologueSection() {
   return (
     <section
       id="prologue"
-      className="relative min-h-[100dvh] flex flex-col justify-between items-center text-center px-5 pt-28 pb-12 sm:pt-32 sm:pb-16 overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col justify-between items-center text-center px-5 pt-16 pb-12 sm:pt-20 sm:pb-16 overflow-hidden"
     >
       {/* Top Monogram Tagline */}
       <motion.div

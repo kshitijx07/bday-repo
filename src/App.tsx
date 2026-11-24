@@ -1,6 +1,6 @@
-import NavBar from './components/NavBar';
 import ParticleCanvas from './components/ParticleCanvas';
 import CustomCursor from './components/CustomCursor';
+import AudioToggle from './components/AudioToggle';
 import PrologueSection from './components/PrologueSection';
 import RecognitionSection from './components/RecognitionSection';
 import TruthsSection from './components/TruthsSection';
@@ -18,8 +18,10 @@ export default function App() {
       {/* Custom Romantic Magnetic Cursor for Desktop */}
       <CustomCursor />
 
-      {/* Floating Top Nav & Audio Controller */}
-      <NavBar />
+      {/* Floating Audio Controller (Minimal Top-Right) */}
+      <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
+        <AudioToggle />
+      </div>
 
       {/* Poetic Parallax Chapters */}
       <main className="relative z-10 flex flex-col w-full">
