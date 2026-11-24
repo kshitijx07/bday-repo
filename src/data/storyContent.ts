@@ -29,8 +29,8 @@ export const storyData = {
   tagline: 'a birthday keepsake · designed slowly · dedicated to Neha',
 
   gate: {
-    headline: 'Happy Birthday,',
-    subheadline: 'To the girl whose presence turns ordinary days into poetry. May this new year bring you everything your radiant soul deserves.',
+    headline: 'For',
+    subheadline: 'A private birthday keepsake · Dedicated to the girl whose presence turns ordinary days into poetry.',
     prompt: 'Tap or hold the wax seal to unwrap your birthday story',
     footnote: 'A birthday celebration in seven cinematic chapters',
   },

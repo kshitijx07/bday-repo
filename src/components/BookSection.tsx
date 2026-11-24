@@ -95,23 +95,23 @@ export default function BookSection() {
   return (
     <section
       id="book-chapter"
-      className="relative min-h-[100dvh] py-20 px-4 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
+      className="relative min-h-[100dvh] py-14 sm:py-20 px-3 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
     >
       {/* Chapter header */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
+      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+        <span className="label text-[0.6rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
           {bookSection.label}
         </span>
-        <div className="h-[1px] w-8 bg-forest/20" />
-        <span className="label text-[0.6rem] sm:text-[0.62rem] text-forest/60 tracking-wider">
+        <div className="h-[1px] w-6 sm:w-8 bg-forest/20" />
+        <span className="label text-[0.58rem] sm:text-[0.62rem] text-forest/60 tracking-wider">
           {bookSection.year}
         </span>
       </div>
 
-      <h2 className="font-serif text-[clamp(2.1rem,6vw,4.2rem)] font-light leading-tight text-forest-deep mb-2">
+      <h2 className="font-serif text-[clamp(1.9rem,5.5vw,4.2rem)] font-light leading-tight text-forest-deep mb-1.5 sm:mb-2">
         {bookSection.title}
       </h2>
-      <p className="text-xs sm:text-sm text-forest/70 max-w-md mb-8 sm:mb-12">
+      <p className="text-xs sm:text-sm text-forest/70 max-w-md mb-6 sm:mb-10">
         {!isOpen
           ? 'Tap the book cover to open this private keepsake.'
           : 'A secret is kept inside. Tap the seal to unveil what’s hidden.'}
@@ -121,15 +121,15 @@ export default function BookSection() {
       <div
         ref={containerRef}
         style={{ perspective: 1600 }}
-        className="relative select-none my-2 touch-manipulation"
+        className="relative select-none my-1 sm:my-2 touch-manipulation"
       >
         <motion.div
           style={{
             rotateX,
             rotateY,
             transformStyle: 'preserve-3d',
-            width: 'min(84vw, 320px)',
-            height: 'calc(min(84vw, 320px) * 1.42)',
+            width: 'min(82vw, 305px)',
+            height: 'calc(min(82vw, 305px) * 1.42)',
           }}
           className="relative transition-transform duration-300"
         >
@@ -219,7 +219,7 @@ export default function BookSection() {
                       >
                         <div
                           onClick={handleFlipPhoto}
-                          className="relative aspect-[3/4] w-full max-h-[190px] sm:max-h-[210px] overflow-hidden rounded-md border border-forest/20 shadow-md cursor-pointer group bg-forest-darker/5"
+                          className="relative aspect-[3/4] w-full max-h-[175px] sm:max-h-[210px] overflow-hidden rounded-md border border-forest/20 shadow-md cursor-pointer group bg-forest-darker/5"
                         >
                           <AnimatePresence mode="wait">
                             {!isPhotoFlipped ? (

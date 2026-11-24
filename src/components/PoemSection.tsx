@@ -74,7 +74,7 @@ export default function PoemSection() {
     <section
       id="poem-chapter"
       ref={sectionRef}
-      className="relative min-h-[160vh] py-24 overflow-hidden flex flex-col justify-start"
+      className="relative min-h-[140vh] sm:min-h-[160vh] py-16 sm:py-24 overflow-hidden flex flex-col justify-start"
     >
       {/* Background Giant Parallax Outlined Words */}
       <div
@@ -112,18 +112,18 @@ export default function PoemSection() {
       </motion.div>
 
       {/* Sticky Scroll-Lit Poetic Paragraph */}
-      <div className="sticky top-1/4 sm:top-1/3 z-10 mx-auto max-w-3xl px-5 sm:px-8 text-center">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
+      <div className="sticky top-[24vh] sm:top-1/3 z-10 mx-auto max-w-3xl px-4 sm:px-8 text-center">
+        <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+          <span className="label text-[0.6rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
             {poemSection.label}
           </span>
-          <div className="h-[1px] w-8 bg-forest/20" />
-          <span className="label text-[0.6rem] text-forest/60 tracking-wider">
+          <div className="h-[1px] w-6 sm:w-8 bg-forest/20" />
+          <span className="label text-[0.58rem] sm:text-[0.6rem] text-forest/60 tracking-wider">
             {poemSection.title}
           </span>
         </div>
 
-        <p className="font-serif text-[clamp(1.75rem,5.2vw,3.6rem)] font-light leading-snug sm:leading-tight">
+        <p className="font-serif text-[clamp(1.45rem,5.2vw,3.4rem)] font-light leading-snug sm:leading-tight">
           {words.map((w, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;

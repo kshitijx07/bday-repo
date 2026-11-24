@@ -59,7 +59,7 @@ function PolaroidCard({
         whileHover={{ scale: 1.03, rotate: 0 }}
         transition={{ duration: 0.35 }}
         onClick={onOpen}
-        className="relative max-w-[340px] sm:max-w-none mx-auto w-full bg-[#FFFDF9] p-3 pb-5 rounded-md shadow-md hover:shadow-xl border border-forest/15 cursor-pointer select-none group flex flex-col will-change-transform touch-manipulation"
+        className="relative max-w-[290px] sm:max-w-none mx-auto w-full bg-[#FFFDF9] p-3 pb-5 rounded-md shadow-md hover:shadow-xl border border-forest/15 cursor-pointer select-none group flex flex-col will-change-transform touch-manipulation"
       >
         {/* Washi Tape Strip at top in Blush Pink */}
         <div
@@ -237,7 +237,7 @@ export default function MemoriesSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="max-h-[58dvh] max-w-full rounded-md border border-ivory/30 object-contain shadow-2xl"
+                  className="max-h-[46dvh] sm:max-h-[58dvh] max-w-full rounded-md border border-ivory/30 object-contain shadow-2xl"
                 />
               </AnimatePresence>
               <h4 className="mt-3 font-serif text-lg sm:text-2xl text-ivory text-center tracking-wide">

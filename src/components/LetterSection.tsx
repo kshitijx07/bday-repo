@@ -31,22 +31,22 @@ export default function LetterSection() {
     <section
       id="letter-chapter"
       ref={sectionRef}
-      className="relative min-h-[100dvh] py-24 px-4 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center"
+      className="relative min-h-[100dvh] py-16 sm:py-24 px-3 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center"
     >
-      <div className="flex items-center gap-2 mb-3">
-        <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
+      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+        <span className="label text-[0.6rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
           {letterSection.label}
         </span>
-        <div className="h-[1px] w-8 bg-forest/20" />
-        <span className="label text-[0.6rem] text-forest/60 tracking-wider">
+        <div className="h-[1px] w-6 sm:w-8 bg-forest/20" />
+        <span className="label text-[0.58rem] sm:text-[0.6rem] text-forest/60 tracking-wider">
           Birthday Letter
         </span>
       </div>
 
-      <h2 className="font-serif text-[clamp(2.1rem,6vw,4.4rem)] font-light leading-tight text-forest-deep mb-2">
+      <h2 className="font-serif text-[clamp(1.9rem,5.5vw,4.4rem)] font-light leading-tight text-forest-deep mb-1.5 sm:mb-2">
         {letterSection.title}
       </h2>
-      <p className="text-xs sm:text-sm text-forest/70 mb-12">
+      <p className="text-xs sm:text-sm text-forest/70 mb-8 sm:mb-12">
         {isOpen ? 'Every word written from the bottom of my heart.' : letterSection.subtitle}
       </p>
 
@@ -67,10 +67,10 @@ export default function LetterSection() {
               tabIndex={0}
               aria-label="Open the birthday letter"
             >
-              <div className="relative rounded-3xl p-6 sm:p-12 border border-forest-light/30 bg-gradient-to-br from-[#244538] via-[#2F5A4B] to-[#1A372D] shadow-2xl group-hover:shadow-[0_12px_36px_rgba(49,92,76,0.3)] transition-all duration-500 overflow-hidden">
-                <div className="flex flex-col items-center gap-5 sm:gap-6">
+              <div className="relative rounded-2xl sm:rounded-3xl p-6 sm:p-12 border border-forest-light/30 bg-gradient-to-br from-[#244538] via-[#2F5A4B] to-[#1A372D] shadow-2xl group-hover:shadow-[0_12px_36px_rgba(49,92,76,0.3)] transition-all duration-500 overflow-hidden">
+                <div className="flex flex-col items-center gap-4 sm:gap-6">
                   {/* Wax Seal with Blush Pink glow */}
-                  <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="relative w-15 h-15 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <svg
                       viewBox="0 0 24 24"
                       width={22}
@@ -82,7 +82,7 @@ export default function LetterSection() {
                   </div>
 
                   <div className="space-y-1">
-                    <p className="font-serif text-xl sm:text-2xl text-ivory italic tracking-wide">
+                    <p className="font-serif text-lg sm:text-2xl text-ivory italic tracking-wide">
                       For Neha · A Birthday Letter
                     </p>
                     <p className="text-xs text-ivory/70 font-sans tracking-wide">
@@ -90,7 +90,7 @@ export default function LetterSection() {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2 text-blush label text-[0.62rem] font-semibold tracking-widest pt-1">
+                  <div className="flex items-center gap-2 text-blush label text-[0.6rem] sm:text-[0.62rem] font-semibold tracking-widest pt-1">
                     <Mail size={13} />
                     <span>Unfold Birthday Letter</span>
                   </div>
@@ -106,11 +106,11 @@ export default function LetterSection() {
               exit={{ opacity: 0, rotateX: -20, scale: 0.9 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformPerspective: 1200 }}
-              className="relative text-left rounded-2xl p-6 sm:p-10 md:p-12 bg-[#FFFDF9] text-forest-deep shadow-2xl border border-forest/15 overflow-hidden"
+              className="relative text-left rounded-2xl p-5 sm:p-10 md:p-12 bg-[#FFFDF9] text-forest-deep shadow-2xl border border-forest/15 overflow-hidden"
             >
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-forest/15 mb-6">
-                <span className="label text-[0.6rem] text-forest/60 tracking-widest uppercase font-semibold">
+              <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-forest/15 mb-4 sm:mb-6">
+                <span className="label text-[0.58rem] sm:text-[0.6rem] text-forest/60 tracking-widest uppercase font-semibold">
                   Happy Birthday Neha · Inked with Love
                 </span>
                 <div className="h-2 w-2 rounded-full bg-blush shadow-[0_0_6px_#F2A7B5]" />
@@ -118,21 +118,21 @@ export default function LetterSection() {
 
               {/* Salutation */}
               <p
-                className="font-serif text-2xl sm:text-3xl text-forest-deep mb-6"
+                className="font-serif text-xl sm:text-3xl text-forest-deep mb-4 sm:mb-6"
                 style={{ fontFamily: '"Dancing Script", cursive' }}
               >
                 {letterSection.greeting}
               </p>
 
               {/* Inked Paragraphs in Timeless Forest Green */}
-              <div className="space-y-5">
+              <div className="space-y-3.5 sm:space-y-5">
                 {letterSection.paragraphs.map((para, idx) => (
                   <motion.p
                     key={idx}
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + idx * 0.15, duration: 0.8 }}
-                    className="font-serif text-base sm:text-lg md:text-xl leading-relaxed text-forest-deep/90"
+                    className="font-serif text-sm sm:text-lg md:text-xl leading-relaxed text-forest-deep/90"
                   >
                     {para}
                   </motion.p>

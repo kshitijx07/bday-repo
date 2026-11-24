@@ -161,28 +161,28 @@ export default function GardenSection() {
   return (
     <section
       id="garden-chapter"
-      className="relative min-h-[100dvh] py-24 px-4 sm:px-8 max-w-5xl mx-auto flex flex-col justify-center items-center text-center"
+      className="relative min-h-[100dvh] py-16 sm:py-24 px-3 sm:px-8 max-w-5xl mx-auto flex flex-col justify-center items-center text-center"
     >
       {/* Chapter Header */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
+      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+        <span className="label text-[0.6rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
           {gardenSection.label}
         </span>
-        <div className="h-[1px] w-8 bg-forest/20" />
-        <span className="label text-[0.6rem] text-forest/60 tracking-wider">
+        <div className="h-[1px] w-6 sm:w-8 bg-forest/20" />
+        <span className="label text-[0.58rem] sm:text-[0.6rem] text-forest/60 tracking-wider">
           {gardenSection.title}
         </span>
       </div>
 
-      <h2 className="font-serif text-[clamp(2.1rem,6vw,4.4rem)] font-light leading-tight text-forest-deep mb-2">
+      <h2 className="font-serif text-[clamp(1.9rem,5.5vw,4.4rem)] font-light leading-tight text-forest-deep mb-1.5 sm:mb-2">
         {gardenSection.title}
       </h2>
-      <p className="text-xs sm:text-sm text-forest/70 max-w-md mb-12">
+      <p className="text-xs sm:text-sm text-forest/70 max-w-md mb-8 sm:mb-12">
         {gardenSection.subtitle}
       </p>
 
       {/* The 4 Self-Drawing Flowers 2x2 on Mobile, 4x1 on Desktop */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-3xl mb-10 px-1">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-5 w-full max-w-3xl mb-8 sm:mb-10 px-1">
         {gardenSection.flowers.map((f: FlowerReason) => {
           const isSelected = f.id === activeFlowerId;
           return (

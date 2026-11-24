@@ -87,9 +87,9 @@ export default function CakeSection() {
   return (
     <section
       id="cake-chapter"
-      className="relative min-h-[100dvh] pt-20 px-4 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
+      className="relative min-h-[100dvh] pt-14 sm:pt-20 px-3 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
       style={{
-        paddingBottom: 'max(7rem, calc(env(safe-area-inset-bottom, 2rem) + 4rem))',
+        paddingBottom: 'max(4.5rem, calc(env(safe-area-inset-bottom, 2rem) + 2.5rem))',
       }}
     >
       {/* Dim Screen Aura when candle blown */}
@@ -103,12 +103,12 @@ export default function CakeSection() {
       )}
 
       {/* Chapter header */}
-      <div className="relative z-30 flex items-center gap-2 mb-3">
-        <span className="label text-[0.62rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
+      <div className="relative z-30 flex items-center gap-2 mb-2 sm:mb-3">
+        <span className="label text-[0.6rem] sm:text-xs text-blush font-semibold tracking-widest uppercase">
           {cakeSection.label}
         </span>
-        <div className="h-[1px] w-8 bg-forest/20" />
-        <span className="label text-[0.6rem] text-forest/60 tracking-wider">
+        <div className="h-[1px] w-6 sm:w-8 bg-forest/20" />
+        <span className="label text-[0.58rem] sm:text-[0.6rem] text-forest/60 tracking-wider">
           Make A Wish
         </span>
       </div>
@@ -118,18 +118,18 @@ export default function CakeSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1.2 }}
-        className="relative z-30 font-serif text-[clamp(2.4rem,8vw,5.5rem)] font-light leading-[1.04] text-forest-deep mb-2"
+        className="relative z-30 font-serif text-[clamp(2.1rem,7.5vw,5.5rem)] font-light leading-[1.04] text-forest-deep mb-2"
       >
         {cakeSection.headline[0]}{' '}
         <span className="text-blush italic font-normal">{cakeSection.headline[1]}</span>
       </motion.h2>
 
-      <p className="relative z-30 mt-2 max-w-md text-sm sm:text-base font-serif italic text-forest/80 leading-relaxed px-4">
+      <p className="relative z-30 mt-1 sm:mt-2 max-w-md text-xs sm:text-base font-serif italic text-forest/80 leading-relaxed px-4">
         {cakeSection.message}
       </p>
 
       {/* SVG Line-Art Cake with Candle */}
-      <div className="relative z-30 my-8 sm:my-10 flex flex-col items-center">
+      <div className="relative z-30 my-6 sm:my-10 flex flex-col items-center">
         {/* Flame with Tap/Hold or Mic interaction */}
         <div className="relative flex flex-col items-center">
           <AnimatePresence mode="wait">
@@ -141,15 +141,15 @@ export default function CakeSection() {
                 exit={{ scale: 0.1, opacity: 0, y: -25 }}
                 transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
                 onClick={handleBlow}
-                className="relative flex items-center justify-center w-16 h-16 mb-1 cursor-pointer select-none group touch-manipulation"
+                className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 mb-1 cursor-pointer select-none group touch-manipulation"
                 role="button"
                 tabIndex={0}
                 aria-label="Blow out the candle flame"
               >
                 {/* Blush Pink Aura Pulse */}
                 <div className="absolute inset-1 bg-blush rounded-full blur-md opacity-70 animate-pulse pointer-events-none" />
-                <div className="relative p-2.5 rounded-full bg-gradient-to-t from-blush to-amber-100 text-blush-dark shadow-[0_0_18px_#F2A7B5] transform active:scale-90 transition-transform">
-                  <Flame size={28} className="fill-blush-deep" />
+                <div className="relative p-2 sm:p-2.5 rounded-full bg-gradient-to-t from-blush to-amber-100 text-blush-dark shadow-[0_0_18px_#F2A7B5] transform active:scale-90 transition-transform">
+                  <Flame size={24} className="fill-blush-deep sm:w-7 sm:h-7" />
                 </div>
               </motion.div>
             ) : (
@@ -169,7 +169,7 @@ export default function CakeSection() {
           {/* Inline SVG Line-Art Birthday Cake in Forest Green and Blush Pink */}
           <svg
             viewBox="0 0 160 140"
-            className="w-48 sm:w-56 h-auto stroke-forest fill-none overflow-visible"
+            className="w-40 sm:w-56 h-auto stroke-forest fill-none overflow-visible"
             strokeWidth={1.5}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -269,7 +269,7 @@ export default function CakeSection() {
       </div>
 
       {/* Featured Celebration Photo */}
-      <div className="relative z-30 w-full max-w-[290px] sm:max-w-sm rounded-2xl overflow-hidden border border-forest/15 shadow-xl bg-[#FFFDF9] mb-10">
+      <div className="relative z-30 w-full max-w-[260px] sm:max-w-sm rounded-xl sm:rounded-2xl overflow-hidden border border-forest/15 shadow-xl bg-[#FFFDF9] mb-8 sm:mb-10">
         <img
           src={cakeSection.photo}
           alt="Neha birthday celebration"
