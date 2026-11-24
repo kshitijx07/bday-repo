@@ -144,10 +144,10 @@ export default function WaxLetterSection() {
               </div>
 
               {/* Re-seal button */}
-              <div className="mt-8 flex justify-end">
+              <div className="mt-8 flex justify-center sm:justify-end">
                 <button
                   onClick={handleClose}
-                  className="glass flex items-center gap-2 rounded-full px-4 py-2 text-xs text-sky hover:border-blush active:scale-95 transition-all cursor-pointer"
+                  className="glass flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-sky hover:border-blush active:scale-95 transition-all cursor-pointer"
                 >
                   <RotateCcw size={12} />
                   <span>Fold Letter</span>

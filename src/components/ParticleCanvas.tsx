@@ -19,8 +19,13 @@ export default function ParticleCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
+
+    const isTouch =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches;
 
     let animId: number;
     let width = (canvas.width = window.innerWidth);
@@ -31,48 +36,45 @@ export default function ParticleCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
 
     const particles: Particle[] = [];
-    const count = Math.min(Math.floor((width * height) / 38000), 45);
+    // Lightweight count: 14 particles on mobile, 32 on desktop
+    const count = isTouch ? 14 : Math.min(Math.floor((width * height) / 42000), 32);
 
     const colors = [
-      'rgba(242, 167, 181, 0.45)', // Blush
-      'rgba(242, 167, 181, 0.25)',
-      'rgba(49, 92, 76, 0.12)',   // Sky/Forest
-      'rgba(255, 247, 232, 0.7)',  // Ivory
+      'rgba(242, 167, 181, 0.4)', // Blush
+      'rgba(242, 167, 181, 0.22)',
+      'rgba(49, 92, 76, 0.1)',    // Sky/Forest
+      'rgba(255, 247, 232, 0.6)', // Ivory
     ];
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 6 + 3,
-        speedY: Math.random() * 0.45 + 0.15,
-        speedX: Math.sin(i) * 0.25,
-        opacity: Math.random() * 0.6 + 0.2,
+        size: Math.random() * 5 + 3,
+        speedY: Math.random() * 0.35 + 0.15,
+        speedX: Math.sin(i) * 0.2,
+        opacity: Math.random() * 0.5 + 0.2,
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.02,
+        rotationSpeed: (Math.random() - 0.5) * 0.015,
         type: i % 3 === 0 ? 'petal' : 'dust',
         color: colors[i % colors.length],
       });
     }
 
-    // Touch / mouse interaction
     let mouseX = -1000;
     let mouseY = -1000;
 
-    const onPointerMove = (e: MouseEvent | TouchEvent) => {
-      if ('touches' in e && e.touches.length > 0) {
-        mouseX = e.touches[0].clientX;
-        mouseY = e.touches[0].clientY;
-      } else if ('clientX' in e) {
-        mouseX = (e as MouseEvent).clientX;
-        mouseY = (e as MouseEvent).clientY;
-      }
-    };
-    window.addEventListener('mousemove', onPointerMove, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    // Only attach mousemove on desktop with fine pointer
+    if (!isTouch) {
+      const onPointerMove = (e: MouseEvent) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      };
+      window.addEventListener('mousemove', onPointerMove, { passive: true });
+    }
 
     const drawPetal = (x: number, y: number, size: number, rotation: number, color: string) => {
       ctx.save();
@@ -87,27 +89,37 @@ export default function ParticleCanvas() {
       ctx.restore();
     };
 
+    let isVisible = true;
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     const render = () => {
+      if (!isVisible) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Motion update
         p.y += p.speedY;
-        p.x += Math.sin(p.y * 0.01) * 0.4 + p.speedX;
+        p.x += Math.sin(p.y * 0.01) * 0.3 + p.speedX;
         p.rotation += p.rotationSpeed;
 
-        // Interaction drift away from mouse
-        const dx = p.x - mouseX;
-        const dy = p.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 90) {
-          p.x += (dx / dist) * 1.5;
-          p.y += (dy / dist) * 1.5;
+        if (!isTouch) {
+          const dx = p.x - mouseX;
+          const dy = p.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 80) {
+            p.x += (dx / dist) * 1.2;
+            p.y += (dy / dist) * 1.2;
+          }
         }
 
-        // Screen wrap
         if (p.y > height + 20) {
           p.y = -20;
           p.x = Math.random() * width;
@@ -119,7 +131,7 @@ export default function ParticleCanvas() {
           drawPetal(p.x, p.y, p.size, p.rotation, p.color);
         } else {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * 0.35, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
           ctx.fillStyle = p.color;
           ctx.fill();
         }
@@ -133,15 +145,14 @@ export default function ParticleCanvas() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', onResize);
-      window.removeEventListener('mousemove', onPointerMove);
-      window.removeEventListener('touchmove', onPointerMove);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-60"
       aria-hidden="true"
     />
   );

@@ -14,7 +14,7 @@ import { initSmoothScroll } from './utils/motion';
 
 export default function App() {
   useEffect(() => {
-    // Initialize butter-smooth Lenis scroll synchronized with GSAP ScrollTrigger
+    // Initialize Lenis smooth scroll on desktop, native 120Hz/60Hz on mobile
     const lenis = initSmoothScroll();
     return () => {
       lenis?.destroy();
@@ -22,20 +22,26 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full bg-gradient-to-b from-ivory via-ivory to-blush/20 text-sky overflow-x-hidden selection:bg-blush selection:text-sky">
+    <div className="relative min-h-screen w-full max-w-full bg-gradient-to-b from-ivory via-ivory to-blush/20 text-sky overflow-x-hidden selection:bg-blush selection:text-sky">
       {/* Background Interactive Ambient Canvas */}
       <ParticleCanvas />
 
       {/* Luxury Custom Romantic Magnetic Cursor for Desktop */}
       <CustomCursor />
 
-      {/* Floating Audio Controller (Minimal Top-Right) */}
-      <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
+      {/* Floating Audio Controller with Safe Area Inset Support */}
+      <div
+        className="fixed z-50 pointer-events-auto"
+        style={{
+          top: 'max(0.75rem, env(safe-area-inset-top, 0.75rem))',
+          right: 'max(0.75rem, env(safe-area-inset-right, 0.75rem))',
+        }}
+      >
         <AudioToggle />
       </div>
 
       {/* Cinematic Agency Motion Sections */}
-      <main className="relative z-10 flex flex-col w-full">
+      <main className="relative z-10 flex flex-col w-full max-w-full overflow-x-hidden">
         {/* 1. Mouse Lerped Parallax Hero with Split-Text Reveal */}
         <PrologueSection />
 

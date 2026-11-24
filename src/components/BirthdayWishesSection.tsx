@@ -30,7 +30,8 @@ export default function BirthdayWishesSection() {
   return (
     <section
       id="wish"
-      className="relative min-h-[100dvh] py-20 sm:py-28 px-5 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
+      className="relative min-h-[100dvh] pt-16 sm:pt-28 px-5 sm:px-8 max-w-4xl mx-auto flex flex-col justify-center items-center text-center overflow-hidden"
+      style={{ paddingBottom: 'max(4rem, env(safe-area-inset-bottom, 4rem))' }}
     >
       {/* Chapter Header */}
       <div className="flex items-center gap-2 mb-4">

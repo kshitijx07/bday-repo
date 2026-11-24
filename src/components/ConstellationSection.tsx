@@ -26,13 +26,13 @@ export default function ConstellationSection() {
     starsRef.current.push({
       x,
       y,
-      radius: Math.random() * 3 + 2.5,
+      radius: Math.random() * 2.5 + 2,
       alpha: 1,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
     });
 
-    if (starsRef.current.length > 28) {
+    if (starsRef.current.length > 24) {
       starsRef.current.shift();
     }
     setTouchCount((c) => c + 1);
@@ -46,7 +46,7 @@ export default function ConstellationSection() {
 
     let animId: number;
     let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || 450);
+    let height = (canvas.height = canvas.parentElement?.clientHeight || 340);
 
     const onResize = () => {
       if (!canvas || !canvas.parentElement) return;
@@ -60,51 +60,45 @@ export default function ConstellationSection() {
 
       const stars = starsRef.current;
 
-      // Update positions
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
         s.x += s.vx;
         s.y += s.vy;
-        s.alpha -= 0.0025; // fade slowly
+        s.alpha -= 0.003;
       }
 
-      // Filter dead stars
       starsRef.current = stars.filter((s) => s.alpha > 0.05);
 
-      // Connect stars with soft glowing threads
       for (let i = 0; i < stars.length; i++) {
         for (let j = i + 1; j < stars.length; j++) {
           const dx = stars[i].x - stars[j].x;
           const dy = stars[i].y - stars[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 130) {
+          if (dist < 120) {
             ctx.beginPath();
             ctx.moveTo(stars[i].x, stars[i].y);
             ctx.lineTo(stars[j].x, stars[j].y);
-            ctx.strokeStyle = `rgba(242, 167, 181, ${(1 - dist / 130) * Math.min(stars[i].alpha, stars[j].alpha) * 0.8})`;
+            ctx.strokeStyle = `rgba(242, 167, 181, ${(1 - dist / 120) * Math.min(stars[i].alpha, stars[j].alpha) * 0.75})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
       }
 
-      // Draw each star with soft aura
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
-        // Aura
-        const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius * 3);
+        const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius * 2.8);
         grad.addColorStop(0, `rgba(242, 167, 181, ${s.alpha * 0.7})`);
         grad.addColorStop(1, 'rgba(242, 167, 181, 0)');
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius * 3, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.radius * 2.8, 0, Math.PI * 2);
         ctx.fill();
 
-        // Core
         ctx.fillStyle = `rgba(49, 92, 76, ${s.alpha})`;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius * 0.6, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.radius * 0.55, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -127,75 +121,75 @@ export default function ConstellationSection() {
   return (
     <section
       id="constellation"
-      className="relative min-h-[90dvh] py-20 px-5 sm:px-8 max-w-5xl mx-auto flex flex-col justify-center items-center text-center"
+      className="relative min-h-[85dvh] py-16 sm:py-24 px-4 sm:px-8 max-w-5xl mx-auto flex flex-col justify-center items-center text-center w-full"
     >
       {/* Chapter Header */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className="label text-[0.65rem] text-blush font-semibold tracking-widest uppercase">
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
+        <span className="label text-[0.62rem] sm:text-[0.65rem] text-blush font-semibold tracking-widest uppercase">
           {chapter5.number}
         </span>
         <div className="h-[1px] w-8 bg-blush/40" />
-        <span className="label text-[0.62rem] text-sky/60 tracking-wider">
+        <span className="label text-[0.6rem] sm:text-[0.62rem] text-sky/60 tracking-wider">
           {chapter5.label}
         </span>
       </div>
 
-      <h2 className="font-serif text-[clamp(2.1rem,6vw,4.5rem)] font-light leading-[1.08] text-sky mb-2">
+      <h2 className="font-serif text-[clamp(2rem,6vw,4.5rem)] font-light leading-[1.08] text-sky mb-2">
         {chapter5.headline}
       </h2>
-      <p className="text-xs sm:text-sm text-sky/75 max-w-md mb-8">
+      <p className="text-xs sm:text-sm text-sky/75 max-w-md mb-6 sm:mb-8 px-2">
         {chapter5.prompt}
       </p>
 
-      {/* Interactive Sky Canvas Box */}
-      <div className="relative w-full h-[380px] sm:h-[440px] rounded-3xl overflow-hidden border border-blush/40 shadow-xl bg-gradient-to-b from-ivory via-ivory/80 to-blush/20">
+      {/* Interactive Sky Canvas Box (Responsive Dimensions) */}
+      <div className="relative w-full h-[320px] sm:h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden border border-blush/40 shadow-xl bg-gradient-to-b from-ivory via-ivory/80 to-blush/20">
         <canvas
           ref={canvasRef}
           onPointerDown={handlePointerDown}
           className="absolute inset-0 w-full h-full cursor-crosshair touch-none"
         />
 
-        {/* Central Couple Resonance Monogram Nodes */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center gap-12 sm:gap-24">
+        {/* Central Couple Resonance Monogram Nodes (Comfortably Spaced on Mobile) */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center gap-4 sm:gap-20 px-3">
           {/* Node 1: Kshitij */}
-          <div className="flex flex-col items-center gap-2 animate-float">
-            <div className="p-4 sm:p-5 rounded-full border border-sky/30 bg-ivory/90 shadow-md">
-              <span className="font-serif text-lg sm:text-2xl text-sky font-normal">
+          <div className="flex flex-col items-center gap-1.5 animate-float">
+            <div className="p-3 sm:p-5 rounded-full border border-sky/30 bg-ivory/95 shadow-md">
+              <span className="font-serif text-base sm:text-2xl text-sky font-normal">
                 {hisName}
               </span>
             </div>
-            <span className="text-[0.6rem] label text-sky/60">My Soul</span>
+            <span className="text-[0.55rem] sm:text-[0.6rem] label text-sky/60">My Soul</span>
           </div>
 
-          {/* Golden/Blush Connecting Heart */}
-          <div className="flex flex-col items-center">
-            <Heart size={20} className="animate-beat text-blush drop-shadow-md" />
-            <span className="text-[0.55rem] label text-blush mt-1">Eternity</span>
+          {/* Central Connecting Heart */}
+          <div className="flex flex-col items-center shrink-0">
+            <Heart size={18} className="animate-beat text-blush drop-shadow-md" />
+            <span className="text-[0.5rem] sm:text-[0.55rem] label text-blush mt-1">Eternity</span>
           </div>
 
           {/* Node 2: Neha */}
           <div
-            className="flex flex-col items-center gap-2 animate-float"
+            className="flex flex-col items-center gap-1.5 animate-float"
             style={{ animationDelay: '1.5s' }}
           >
-            <div className="p-4 sm:p-5 rounded-full border border-blush bg-ivory/90 shadow-md">
-              <span className="font-serif text-lg sm:text-2xl text-blush font-normal">
+            <div className="p-3 sm:p-5 rounded-full border border-blush bg-ivory/95 shadow-md">
+              <span className="font-serif text-base sm:text-2xl text-blush font-normal">
                 {herName}
               </span>
             </div>
-            <span className="text-[0.6rem] label text-blush">My Home</span>
+            <span className="text-[0.55rem] sm:text-[0.6rem] label text-blush">My Home</span>
           </div>
         </div>
 
         {/* Helper Badge */}
-        <div className="pointer-events-none absolute bottom-4 inset-x-0 flex justify-center">
-          <span className="label text-[0.62rem] text-sky/60 bg-ivory/85 px-4 py-1.5 rounded-full border border-blush/30 shadow-xs">
-            {touchCount === 0 ? 'Tap anywhere inside to ignite stars' : `${touchCount} stars connected across eternity`}
+        <div className="pointer-events-none absolute bottom-3 sm:bottom-4 inset-x-0 flex justify-center px-2">
+          <span className="label text-[0.58rem] sm:text-[0.62rem] text-sky/70 bg-ivory/90 px-3 sm:px-4 py-1.5 rounded-full border border-blush/30 shadow-xs truncate max-w-[90%]">
+            {touchCount === 0 ? 'Tap anywhere inside to ignite stars ✨' : `${touchCount} stars connected across eternity`}
           </span>
         </div>
       </div>
 
-      <p className="text-[0.7rem] text-sky/60 max-w-md mt-6 italic font-serif">
+      <p className="text-[0.68rem] sm:text-[0.7rem] text-sky/60 max-w-md mt-4 sm:mt-6 italic font-serif px-2">
         {chapter5.subtext}
       </p>
     </section>

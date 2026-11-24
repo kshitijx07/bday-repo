@@ -24,55 +24,66 @@ export default function MarqueeBand() {
     const track = trackRef.current;
     if (!track) return;
 
-    // Continuous scroll animation
+    const isTouch =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches;
+
+    // Continuous marquee scroll animation
     const tween = gsap.to(track, {
       xPercent: -50,
       repeat: -1,
-      duration: 24,
+      duration: isTouch ? 28 : 22,
       ease: 'none',
     });
 
-    // Speed up and skew based on scroll velocity
-    let skewSetter = gsap.quickTo(track, 'skewX');
-    let clamp = gsap.utils.clamp(-8, 8);
+    // Speed up slightly based on scroll velocity (desktop/fine pointer only)
+    let trigger: ScrollTrigger | undefined;
 
-    const trigger = ScrollTrigger.create({
-      onUpdate: (self) => {
-        const vel = self.getVelocity() / 300;
-        skewSetter(clamp(vel));
-        gsap.to(tween, {
-          timeScale: 1 + Math.abs(vel) * 0.4,
-          duration: 0.4,
-          overwrite: 'auto',
-        });
-      },
-    });
+    if (!isTouch) {
+      let skewSetter = gsap.quickTo(track, 'skewX');
+      let clamp = gsap.utils.clamp(-6, 6);
+
+      trigger = ScrollTrigger.create({
+        onUpdate: (self) => {
+          const vel = self.getVelocity() / 350;
+          skewSetter(clamp(vel));
+          gsap.to(tween, {
+            timeScale: 1 + Math.min(Math.abs(vel) * 0.3, 2),
+            duration: 0.4,
+            overwrite: 'auto',
+          });
+        },
+      });
+    }
 
     return () => {
       tween.kill();
-      trigger.kill();
+      trigger?.kill();
     };
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full overflow-hidden py-4 sm:py-6 my-10 sm:my-16 bg-gradient-to-r from-sky via-sky-light to-sky text-ivory transform -rotate-1 shadow-lg"
-      style={{ willChange: 'transform' }}
-    >
+    <div className="relative w-full max-w-full overflow-hidden py-3">
       <div
-        ref={trackRef}
-        className="flex items-center gap-6 sm:gap-10 whitespace-nowrap will-change-transform font-serif text-sm sm:text-lg tracking-widest font-normal uppercase"
+        ref={containerRef}
+        className="w-[105%] -ml-[2.5%] overflow-hidden py-3.5 sm:py-5 bg-gradient-to-r from-sky via-sky-light to-sky text-ivory transform -rotate-1 shadow-md"
+        style={{ willChange: 'transform' }}
       >
-        {/* Repeated twice for infinite loop */}
-        {[...PHRASES, ...PHRASES].map((phrase, idx) => (
-          <div key={idx} className="flex items-center gap-6 sm:gap-10">
-            <span className="hover:text-blush transition-colors cursor-default">
-              {phrase}
-            </span>
-            <Heart size={10} className="text-blush inline-block" />
-          </div>
-        ))}
+        <div
+          ref={trackRef}
+          className="flex items-center gap-6 sm:gap-10 whitespace-nowrap will-change-transform font-serif text-xs sm:text-base tracking-widest font-normal uppercase"
+        >
+          {/* Repeated twice for seamless loop */}
+          {[...PHRASES, ...PHRASES].map((phrase, idx) => (
+            <div key={idx} className="flex items-center gap-6 sm:gap-10">
+              <span className="hover:text-blush transition-colors cursor-default">
+                {phrase}
+              </span>
+              <Heart size={9} className="text-blush shrink-0" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
