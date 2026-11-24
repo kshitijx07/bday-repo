@@ -71,9 +71,14 @@ export default function LetterSection() {
                 <div className="flex flex-col items-center gap-5 sm:gap-6">
                   {/* Wax Seal with Blush Pink glow */}
                   <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <span className="font-serif text-sm tracking-widest font-semibold text-ivory">
-                      K &amp; N
-                    </span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width={22}
+                      height={22}
+                      className="fill-ivory animate-beat drop-shadow-sm"
+                    >
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
                   </div>
 
                   <div className="space-y-1">

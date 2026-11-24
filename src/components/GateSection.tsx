@@ -184,18 +184,15 @@ export default function GateSection() {
             {/* Wax Seal Body in Romantic Blush Pink */}
             <div className="relative w-22 h-22 rounded-full bg-gradient-to-br from-[#F2A7B5] via-[#E28698] to-[#CE687D] border-2 border-blush-light/80 shadow-[0_10px_28px_rgba(242,167,181,0.5)] flex flex-col items-center justify-center transform active:scale-95 transition-transform duration-200">
               {/* Inner Stamp Rim */}
-              <div className="w-17 h-17 rounded-full border border-ivory/50 flex flex-col items-center justify-center">
+              <div className="w-17 h-17 rounded-full border border-ivory/50 flex items-center justify-center">
                 <svg
                   viewBox="0 0 24 24"
-                  width={22}
-                  height={22}
+                  width={26}
+                  height={26}
                   className="fill-ivory animate-beat drop-shadow-sm"
                 >
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
-                <span className="font-serif text-[0.62rem] tracking-widest uppercase font-semibold text-ivory mt-1">
-                  K &amp; N
-                </span>
               </div>
             </div>
           </div>
