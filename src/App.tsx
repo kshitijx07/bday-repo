@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import ParticleCanvas from './components/ParticleCanvas';
+import FilmGrainOverlay from './components/FilmGrainOverlay';
 import CustomCursor from './components/CustomCursor';
 import AudioToggle from './components/AudioToggle';
-import PrologueSection from './components/PrologueSection';
-import MarqueeBand from './components/MarqueeBand';
-import StoryLightSection from './components/StoryLightSection';
-import StackedTruthCards from './components/StackedTruthCards';
-import MemoryReel from './components/MemoryReel';
-import WaxLetterSection from './components/WaxLetterSection';
-import ConstellationSection from './components/ConstellationSection';
-import BirthdayWishesSection from './components/BirthdayWishesSection';
+import GateSection from './components/GateSection';
+import BookSection from './components/BookSection';
+import PoemSection from './components/PoemSection';
+import MemoriesSection from './components/MemoriesSection';
+import GardenSection from './components/GardenSection';
+import LetterSection from './components/LetterSection';
+import CakeSection from './components/CakeSection';
 import { initSmoothScroll } from './utils/motion';
 
 export default function App() {
   useEffect(() => {
-    // Initialize Lenis smooth scroll on desktop, native 120Hz/60Hz on mobile
+    // Lenis smooth scroll on desktop, native hardware 120Hz/60Hz on mobile
     const lenis = initSmoothScroll();
     return () => {
       lenis?.destroy();
@@ -22,14 +22,17 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full max-w-full bg-gradient-to-b from-ivory via-ivory to-blush/20 text-sky overflow-x-hidden selection:bg-blush selection:text-sky">
-      {/* Background Interactive Ambient Canvas */}
+    <div className="relative min-h-screen w-full max-w-full bg-charcoal text-silver overflow-x-hidden selection:bg-signal selection:text-silver-light">
+      {/* 5% Film Grain & Soft Vignette Overlay */}
+      <FilmGrainOverlay />
+
+      {/* Floating Ambient Dust & Petals */}
       <ParticleCanvas />
 
-      {/* Luxury Custom Romantic Magnetic Cursor for Desktop */}
+      {/* Luxury Custom Cursor (Silver dot to red heart / Mobile touch ripples) */}
       <CustomCursor />
 
-      {/* Floating Audio Controller with Safe Area Inset Support */}
+      {/* Floating Audio Controller (Minimal Top-Right) */}
       <div
         className="fixed z-50 pointer-events-auto"
         style={{
@@ -40,31 +43,28 @@ export default function App() {
         <AudioToggle />
       </div>
 
-      {/* Cinematic Agency Motion Sections */}
+      {/* 7 Continuous Film Scroll Sections */}
       <main className="relative z-10 flex flex-col w-full max-w-full overflow-x-hidden">
-        {/* 1. Mouse Lerped Parallax Hero with Split-Text Reveal */}
-        <PrologueSection />
+        {/* 1. Gate Section: Name with Doodle Underline, Floating Dust, Hold Red Wax Seal */}
+        <GateSection />
 
-        {/* 2. Velocity-Sensitive Skewed Marquee Band */}
-        <MarqueeBand />
+        {/* 2. 3D Book Section: Gyroscope/Pointer Tilt, Scroll/Tap Open with Paper-Flip */}
+        <BookSection />
 
-        {/* 3. Word-By-Word Scroll Lighting Reveal & Animated Counters */}
-        <StoryLightSection />
+        {/* 3. Poem Section: Giant Outlined Parallax Words, Scroll-Lit Text, Paper Plane */}
+        <PoemSection />
 
-        {/* 4. Sticky Stacked Cards (Scale Down & Darken) */}
-        <StackedTruthCards />
+        {/* 4. Memories Section: Polaroid Cards, Washi Tape, 3D Tilt & Lightbox */}
+        <MemoriesSection />
 
-        {/* 5. 3D Tilt Memory Archive & Touch Lightbox */}
-        <MemoryReel />
+        {/* 5. Garden Section: 4 Self-Drawing Flowers & Tap-to-Bloom Love Reasons */}
+        <GardenSection />
 
-        {/* 6. Interactive Wax-Sealed Envelope & Sacred Letter */}
-        <WaxLetterSection />
+        {/* 6. Letter Section: Sliding Envelope, 3D Parchment Unfold & Red Signature */}
+        <LetterSection />
 
-        {/* 7. Soul Resonance Constellation Sky */}
-        <ConstellationSection />
-
-        {/* 8. Birthday Candle Blowing & Celebration */}
-        <BirthdayWishesSection />
+        {/* 7. Cake Finale Section: SVG Cake, Mic Breath Blow Detection, Falling Petals */}
+        <CakeSection />
       </main>
     </div>
   );

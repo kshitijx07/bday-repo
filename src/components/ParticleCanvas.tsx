@@ -39,27 +39,27 @@ export default function ParticleCanvas() {
     window.addEventListener('resize', onResize, { passive: true });
 
     const particles: Particle[] = [];
-    // Lightweight count: 14 particles on mobile, 32 on desktop
-    const count = isTouch ? 14 : Math.min(Math.floor((width * height) / 42000), 32);
+    // Strict cap: 16 particles on mobile, 32 on desktop
+    const count = isTouch ? 16 : 32;
 
     const colors = [
-      'rgba(242, 167, 181, 0.4)', // Blush
-      'rgba(242, 167, 181, 0.22)',
-      'rgba(49, 92, 76, 0.1)',    // Sky/Forest
-      'rgba(255, 247, 232, 0.6)', // Ivory
+      'rgba(192, 192, 192, 0.35)', // Silver dust
+      'rgba(192, 192, 192, 0.18)',
+      'rgba(225, 6, 0, 0.22)',      // Signal Red subtle petal
+      'rgba(240, 240, 240, 0.25)',  // Ambient stardust
     ];
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 5 + 3,
+        size: Math.random() * 4.5 + 2,
         speedY: Math.random() * 0.35 + 0.15,
         speedX: Math.sin(i) * 0.2,
         opacity: Math.random() * 0.5 + 0.2,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.015,
-        type: i % 3 === 0 ? 'petal' : 'dust',
+        type: i % 4 === 0 ? 'petal' : 'dust',
         color: colors[i % colors.length],
       });
     }
@@ -67,7 +67,6 @@ export default function ParticleCanvas() {
     let mouseX = -1000;
     let mouseY = -1000;
 
-    // Only attach mousemove on desktop with fine pointer
     if (!isTouch) {
       const onPointerMove = (e: MouseEvent) => {
         mouseX = e.clientX;
@@ -114,7 +113,7 @@ export default function ParticleCanvas() {
           const dx = p.x - mouseX;
           const dy = p.y - mouseY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 80) {
+          if (dist < 70) {
             p.x += (dx / dist) * 1.2;
             p.y += (dy / dist) * 1.2;
           }
