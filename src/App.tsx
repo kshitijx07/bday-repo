@@ -1,19 +1,36 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import BackgroundEffects from './components/BackgroundEffects';
+import NavBar from './components/NavBar';
+import ParticleCanvas from './components/ParticleCanvas';
 import CustomCursor from './components/CustomCursor';
-import HeroSection from './components/HeroSection';
-import StoryBook from './components/StoryBook';
+import PrologueSection from './components/PrologueSection';
+import RecognitionSection from './components/RecognitionSection';
+import TruthsSection from './components/TruthsSection';
+import MemoryReel from './components/MemoryReel';
+import WaxLetterSection from './components/WaxLetterSection';
+import ConstellationSection from './components/ConstellationSection';
+import BirthdayWishesSection from './components/BirthdayWishesSection';
 
 export default function App() {
-  const [phase, setPhase] = useState<'hero' | 'book'>('hero');
   return (
-    <div className="relative h-full w-full overflow-hidden">
-      <BackgroundEffects />
+    <div className="relative min-h-screen w-full bg-gradient-to-b from-ivory via-ivory to-blush/20 text-sky overflow-x-hidden selection:bg-blush selection:text-sky">
+      {/* Background Interactive Ambient Canvas */}
+      <ParticleCanvas />
+
+      {/* Custom Romantic Magnetic Cursor for Desktop */}
       <CustomCursor />
-      <AnimatePresence mode="wait">
-        {phase === 'hero' ? <HeroSection key="hero" onOpen={() => setPhase('book')} /> : <StoryBook key="book" onExit={() => setPhase('hero')} />}
-      </AnimatePresence>
+
+      {/* Floating Top Nav & Audio Controller */}
+      <NavBar />
+
+      {/* Poetic Parallax Chapters */}
+      <main className="relative z-10 flex flex-col w-full">
+        <PrologueSection />
+        <RecognitionSection />
+        <TruthsSection />
+        <MemoryReel />
+        <WaxLetterSection />
+        <ConstellationSection />
+        <BirthdayWishesSection />
+      </main>
     </div>
   );
 }
