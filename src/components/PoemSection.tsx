@@ -13,7 +13,7 @@ function Word({
 }) {
   const opacity = useTransform(p, range, [0.18, 1]);
   const y = useTransform(p, range, [12, 0]);
-  const isHighlighted = /Neha|fire|collision|obsession|lifetime|soul/i.test(w);
+  const isHighlighted = /Neha|Birthday|rarest|light|fire|calm|lifetime|celebrate/i.test(w);
 
   return (
     <motion.span

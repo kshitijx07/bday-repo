@@ -279,7 +279,7 @@ export default function CakeSection() {
         />
         <div className="p-4 bg-[#FFFDF9] border-t border-forest/10 text-center">
           <p className="font-serif text-lg sm:text-xl text-forest-deep font-normal tracking-wide">
-            For Neha · My Muse &amp; Endless Gravity
+            Happy Birthday Neha · My Muse &amp; Endless Light
           </p>
           <p className="label text-[0.62rem] text-blush font-semibold tracking-widest mt-1">
             November 24 · Endless Devotion

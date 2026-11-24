@@ -39,7 +39,7 @@ export default function LetterSection() {
         </span>
         <div className="h-[1px] w-8 bg-forest/20" />
         <span className="label text-[0.6rem] text-forest/60 tracking-wider">
-          Unspoken Truth
+          Birthday Letter
         </span>
       </div>
 
@@ -65,7 +65,7 @@ export default function LetterSection() {
               className="mx-auto max-w-md cursor-pointer select-none group touch-manipulation"
               role="button"
               tabIndex={0}
-              aria-label="Open the love letter"
+              aria-label="Open the birthday letter"
             >
               <div className="relative rounded-3xl p-6 sm:p-12 border border-forest-light/30 bg-gradient-to-br from-[#244538] via-[#2F5A4B] to-[#1A372D] shadow-2xl group-hover:shadow-[0_12px_36px_rgba(49,92,76,0.3)] transition-all duration-500 overflow-hidden">
                 <div className="flex flex-col items-center gap-5 sm:gap-6">
@@ -83,16 +83,16 @@ export default function LetterSection() {
 
                   <div className="space-y-1">
                     <p className="font-serif text-xl sm:text-2xl text-ivory italic tracking-wide">
-                      For Neha · In Quiet Devotion
+                      For Neha · A Birthday Letter
                     </p>
                     <p className="text-xs text-ivory/70 font-sans tracking-wide">
-                      Tap the seal to unfold what’s unsaid
+                      Tap the seal to unfold Kshitij’s birthday letter
                     </p>
                   </div>
 
                   <div className="flex items-center gap-2 text-blush label text-[0.62rem] font-semibold tracking-widest pt-1">
                     <Mail size={13} />
-                    <span>Unfold Monologue</span>
+                    <span>Unfold Birthday Letter</span>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function LetterSection() {
               {/* Header */}
               <div className="flex items-center justify-between pb-4 border-b border-forest/15 mb-6">
                 <span className="label text-[0.6rem] text-forest/60 tracking-widest uppercase font-semibold">
-                  Written for Neha
+                  Happy Birthday Neha · Inked with Love
                 </span>
                 <div className="h-2 w-2 rounded-full bg-blush shadow-[0_0_6px_#F2A7B5]" />
               </div>

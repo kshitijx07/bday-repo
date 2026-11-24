@@ -238,7 +238,7 @@ export default function RosePetalLoader({ onLoaded }: { onLoaded: () => void }) 
 
             {/* Typography */}
             <h3 className="font-serif text-2xl sm:text-3xl text-forest-deep font-light italic tracking-tight">
-              Curating Memories for Neha
+              Curating Birthday Keepsake for Neha
             </h3>
             <p className="font-serif text-xs sm:text-sm text-forest/70 italic mt-1">
               {progress < 100 ? 'Gathering rose petals in the light...' : 'Ready for you ✨'}
@@ -267,7 +267,7 @@ export default function RosePetalLoader({ onLoaded }: { onLoaded: () => void }) 
             transition={{ delay: 0.4, duration: 0.8 }}
             className="relative z-10 label text-[0.58rem] text-forest/45 tracking-widest text-center"
           >
-            designed slowly · dedicated to you
+            designed slowly · dedicated to Neha on her birthday
           </motion.p>
         </motion.div>
       )}

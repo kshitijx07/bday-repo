@@ -195,10 +195,10 @@ export default function BookSection() {
                           Private Keepsake
                         </span>
                         <h4 className="font-serif text-base text-forest-deep font-normal leading-tight">
-                          A secret kept from November 24
+                          A Birthday Wish · November 24
                         </h4>
                         <p className="text-[0.65rem] text-forest/70 italic mt-1 max-w-[200px]">
-                          Tap the seal below to reveal the moment that changed everything.
+                          Tap the seal below to reveal your private birthday surprise.
                         </p>
 
                         <button
@@ -250,17 +250,17 @@ export default function BookSection() {
                                 className="w-full h-full bg-[#FAF2E4] p-4 flex flex-col justify-between text-left"
                               >
                                 <span className="label text-[0.5rem] text-forest/50 tracking-widest">
-                                  Handwritten Note · November 24
+                                  Birthday Note · November 24
                                 </span>
                                 <p
                                   className="font-serif text-sm sm:text-base text-forest-deep italic leading-relaxed my-auto"
                                   style={{ fontFamily: '"Dancing Script", cursive' }}
                                 >
-                                  “The room was loud, but you were the only melody playing. I looked at you and knew forever wasn’t a concept—it was a person.”
+                                  “Happy Birthday, Neha! Watching you laugh and grow into your radiant, unstoppable self is the greatest gift of my life. You are my home and my forever.”
                                 </p>
                                 <div className="flex justify-between items-center text-[0.55rem] label text-blush">
                                   <span>Tap photo to flip back</span>
-                                  <span>— Kshitij</span>
+                                  <span>— Kshitij 🫶🏻</span>
                                 </div>
                               </motion.div>
                             )}
@@ -272,7 +272,7 @@ export default function BookSection() {
                             The exact frame where time forgot how to move ✨
                           </p>
                           <span className="label text-[0.5rem] text-forest/50 block mt-0.5">
-                            Tap photo to read Kshitij’s note on the back
+                            Tap photo to read Kshitij’s birthday note on the back
                           </span>
                         </div>
                       </motion.div>
@@ -290,10 +290,10 @@ export default function BookSection() {
                   >
                     <div className="w-full space-y-1">
                       <span className="label text-[0.55rem] text-blush tracking-widest uppercase font-semibold">
-                        Celestial Alignment
+                        Birthday Constellation
                       </span>
                       <h4 className="font-serif text-lg text-forest-deep leading-tight">
-                        Our Private Frequency
+                        Wishes From My Heart
                       </h4>
                     </div>
 
@@ -321,7 +321,7 @@ export default function BookSection() {
 
                     <div className="w-full bg-[#FAF3E6] p-2.5 rounded-lg border border-forest/10 text-center">
                       <p className="font-serif text-xs italic text-forest-deep leading-relaxed">
-                        “You are my favorite thought in the morning, and my deepest peace at midnight.”
+                        “May this birthday bring you boundless peace, wild laughter, and all the love you effortlessly bring to my life.”
                       </p>
                     </div>
                   </motion.div>
@@ -368,7 +368,7 @@ export default function BookSection() {
                 {bookSection.coverTitle}
               </h3>
               <p className="label text-[0.55rem] text-blush tracking-widest mt-1">
-                A Private Surprise
+                A Birthday Keepsake
               </p>
               <div className="h-[1px] w-8 bg-blush/60 mx-auto mt-3" />
             </div>
