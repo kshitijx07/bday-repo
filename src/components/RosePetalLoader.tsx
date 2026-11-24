@@ -142,18 +142,7 @@ export default function RosePetalLoader({ onLoaded }: { onLoaded: () => void }) 
             ))}
           </div>
 
-          {/* Top Label */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-center gap-2 relative z-10"
-          >
-            <span className="label text-[0.62rem] text-forest/60 tracking-widest uppercase">
-              Issue No. 24 · Private Archive
-            </span>
-            <div className="h-3 w-[1px] bg-forest/20" />
-          </motion.div>
+
 
           {/* Central Blooming Rose & Progress */}
           <div className="relative z-10 flex flex-col items-center my-auto">

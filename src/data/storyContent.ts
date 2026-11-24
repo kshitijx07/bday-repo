@@ -29,7 +29,6 @@ export const storyData = {
   tagline: 'designed slowly · kept in secret · dedicated to you',
 
   gate: {
-    label: 'Issue No. 24 · Private Archive',
     headline: 'For',
     subheadline: 'The muse who turned my chaos into modern poetry.',
     prompt: 'Tap or hold the seal to unlock our story',

@@ -85,20 +85,7 @@ export default function GateSection() {
         paddingBottom: 'max(2.5rem, calc(env(safe-area-inset-bottom, 1rem) + 1.5rem))',
       }}
     >
-      {/* Top Editorial Badge */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.2 }}
-        className="relative z-10 flex flex-col items-center gap-2"
-      >
-        <div className="flex items-center gap-2 text-forest/70 label text-[0.62rem] sm:text-xs tracking-widest">
-          <Sparkles size={11} className="text-blush" />
-          <span>{gate.label}</span>
-          <Sparkles size={11} className="text-blush" />
-        </div>
-        <div className="h-4 w-[1px] bg-forest/20" />
-      </motion.div>
+
 
       {/* Main Content */}
       <div className="relative z-10 max-w-2xl mx-auto my-auto py-6 w-full flex flex-col items-center">
