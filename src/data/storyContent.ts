@@ -30,7 +30,7 @@ export const storyData = {
 
   gate: {
     label: 'Issue No. 24 · Private Archive',
-    headline: 'For Neha,',
+    headline: 'For',
     subheadline: 'The muse who turned my chaos into modern poetry.',
     prompt: 'Hold the wax seal to unlock our frequency',
     footnote: 'A cinematic journey in seven chapters',
